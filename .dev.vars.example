@@ -1,0 +1,17 @@
+# Cloudflare Pages / Workers local env vars
+# Copiá este archivo a .dev.vars y completá con tus valores reales.
+
+# Teléfono de WhatsApp (con código país, sin +)
+PHONE=59175179990
+
+# Datos del desarrollador
+DEVELOPER_NAME=KEY STUDIO
+DEVELOPER_URL=https://keystudio.bo
+
+# Store
+STORE_NAME=MODA FEMENINA
+STORE_EMAIL=hola@modafemenina.bo
+STORE_INSTAGRAM=@modafemenina.bo
+
+# Admin panel
+ADMIN_PASSWORD=tu_password_seguro_aqui

@@ -1,0 +1,16 @@
+name = "moda-femenina"
+compatibility_date = "2025-10-01"
+pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "moda-femenina-db"
+database_id = "REPLACE_WITH_D1_DATABASE_ID"
+
+[[r2_buckets]]
+binding = "R2_ASSETS"
+bucket_name = "moda-femenina-assets"
+preview_bucket_name = "moda-femenina-assets-preview"
+
+[dev]
+port = 8788

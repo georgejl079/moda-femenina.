@@ -1,0 +1,2438 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#6b4c9a">
+<meta name="description" content="MODA FEMENINA · Camisas, Sacos, Pantalones de Vestir, Blazers y más. Moda femenina con estilo y elegancia.">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>MODA FEMENINA | Camisas, Sacos, Blazers y Pantalones de Vestir</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root {
+--primary: #6b4c9a;
+--primary-dark: #4d346f;
+--primary-light: #8566b8;
+--accent: #e8b4c8;
+--accent-dark: #c46b8a;
+--accent-light: #f4d9e4;
+--bg: #fdfbfc;
+--surface: #f5eef2;
+--text: #1e1a24;
+--dim: #5d5566;
+--muted: #9a8fa3;
+--border: #eadfe6;
+--wa: #25D366;
+--safe-b: env(safe-area-inset-bottom, 0px);
+--header-h: 108px;
+--tab-h: 60px;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+body {
+font-family: 'Inter', sans-serif;
+background: var(--bg);
+color: var(--text);
+padding-top: var(--header-h);
+padding-bottom: calc(var(--tab-h) + var(--safe-b));
+}
+body.product-open { padding-top: 56px; }
+body.desktop { padding-bottom: 0; padding-top: 0; }
+h1,h2,h3 {
+font-family: 'Cormorant Garamond', serif;
+text-transform: none;
+letter-spacing: 0.5px;
+font-weight: 600;
+}
+h1 { font-weight: 700; }
+.brand-name, .logo-btn, .desktop-nav button, .tab, .menu-label, .link-btn, .card-btn, .card-btn-wa, .card .price, .pd-price, .btn-add, .promo-body strong, .cat-card span {
+font-family: 'Oswald', sans-serif;
+text-transform: uppercase;
+letter-spacing: 1.5px;
+}
+/* Header */
+.app-header {
+position: fixed;
+top: 0; left: 0; right: 0;
+z-index: 2000;
+background: rgba(107,76,154,0.98);
+backdrop-filter: blur(16px);
+border-bottom: 1px solid rgba(232,180,200,0.35);
+}
+.announcement {
+background: linear-gradient(90deg, #4d346f, var(--primary), #4d346f);
+color: #fff;
+text-align: center;
+padding: 8px 12px;
+font-size: 0.58rem;
+letter-spacing: 2.6px;
+text-transform: uppercase;
+font-family: 'Oswald', sans-serif;
+font-weight: 500;
+}
+.header-inner { width: 100%; }
+.header-row {
+display: flex;
+align-items: center;
+gap: 10px;
+padding: 12px 16px;
+}
+.icon-btn {
+width: 42px; height: 42px;
+border: 1px solid rgba(232,180,200,0.35);
+background: rgba(255,255,255,0.1);
+color: #fff;
+border-radius: 50%;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1rem;
+flex-shrink: 0;
+transition: background .15s;
+}
+.icon-btn:hover { background: rgba(232,180,200,0.2); }
+.logo-btn {
+background: none;
+border: none;
+font-family: 'Oswald', sans-serif;
+font-size: 1.35rem;
+font-weight: 600;
+letter-spacing: 4px;
+cursor: pointer;
+flex-shrink: 0;
+color: #fff;
+position: relative;
+}
+.logo-btn::after {
+content: '';
+position: absolute;
+left: 0; right: 0; bottom: -4px;
+height: 2px;
+background: var(--accent);
+border-radius: 4px;
+}
+.search-sticky {
+flex: 1;
+display: flex;
+align-items: center;
+gap: 10px;
+background: rgba(255,255,255,0.1);
+border: 1px solid rgba(232,180,200,0.3);
+border-radius: 100px;
+padding: 10px 16px;
+min-width: 0;
+color: #fff;
+}
+.search-sticky i { color: var(--accent); font-size: 0.85rem; }
+.search-sticky input {
+border: none;
+background: transparent;
+outline: none;
+width: 100%;
+font-size: 0.85rem;
+color: #fff;
+}
+.search-sticky input::placeholder { color: rgba(255,255,255,0.6); }
+.cart-btn { position: relative; }
+.cart-badge {
+position: absolute;
+top: 0; right: 0;
+background: var(--accent);
+color: var(--primary-dark);
+font-size: 0.55rem;
+font-weight: 700;
+min-width: 17px;
+height: 17px;
+border-radius: 9px;
+display: flex;
+align-items: center;
+justify-content: center;
+border: 2px solid var(--primary);
+}
+/* Vistas */
+.view { display: none; min-height: calc(100vh - var(--header-h) - var(--tab-h)); }
+.view.active { display: block; }
+body.product-open .view:not(#view-product) { display: none !important; }
+body.product-open #view-product { display: block !important; }
+/* Menú */
+.overlay {
+position: fixed; inset: 0;
+background: rgba(30,26,36,0.55);
+z-index: 2500;
+opacity: 0;
+visibility: hidden;
+transition: 0.3s;
+}
+.overlay.show { opacity: 1; visibility: visible; }
+.menu-sidebar {
+position: fixed;
+top: 0; left: -100%;
+width: min(320px, 88vw);
+height: 100dvh;
+background: #fff;
+z-index: 2600;
+transition: left 0.35s cubic-bezier(0.32,0.72,0,1);
+display: flex;
+flex-direction: column;
+box-shadow: 8px 0 32px rgba(107,76,154,0.15);
+}
+.menu-sidebar.open { left: 0; }
+.menu-head {
+padding: 20px;
+border-bottom: 1px solid var(--border);
+display: flex;
+justify-content: space-between;
+align-items: center;
+background: var(--primary);
+color: #fff;
+}
+.menu-head h2 { font-size: 1.1rem; color: #fff; letter-spacing: 3px; }
+.menu-head .icon-btn { color: #fff; }
+.menu-body { flex: 1; overflow-y: auto; padding: 8px 0 16px; }
+.menu-footer {
+flex-shrink: 0;
+padding: 16px 20px calc(16px + var(--safe-b));
+border-top: 1px solid var(--border);
+text-align: center;
+background: var(--surface);
+}
+.menu-footer a { font-size: 0.72rem; color: var(--muted); text-decoration: none; }
+.menu-footer a:hover { color: var(--primary); }
+.menu-footer strong { color: var(--primary); font-weight: 700; letter-spacing: 1.5px; }
+.mobile-only { display: block; }
+.desktop-only { display: none; }
+.menu-label {
+padding: 16px 20px 8px;
+font-size: 0.65rem;
+font-weight: 700;
+letter-spacing: 2px;
+text-transform: uppercase;
+color: var(--accent-dark);
+font-family: 'Oswald', sans-serif;
+}
+.menu-link {
+display: flex;
+align-items: center;
+gap: 14px;
+padding: 14px 20px;
+border: none;
+background: none;
+width: 100%;
+text-align: left;
+font-size: 0.9rem;
+cursor: pointer;
+color: var(--text);
+transition: background 0.15s;
+}
+.menu-link:hover, .menu-link:active { background: var(--surface); }
+.menu-link i { width: 20px; color: var(--primary); }
+.menu-promo {
+margin: 8px 16px;
+padding: 14px;
+background: linear-gradient(135deg, var(--primary), var(--primary-light));
+border-radius: 10px;
+color: #fff;
+cursor: pointer;
+border-left: 3px solid var(--accent);
+}
+.menu-promo strong { display: block; font-size: 0.82rem; margin-bottom: 4px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; }
+.menu-promo span { font-size: 0.72rem; opacity: 0.9; }
+/* Hero */
+.hero-carousel {
+position: relative;
+overflow: hidden;
+aspect-ratio: 4/3;
+background: var(--surface);
+}
+.hero-slide {
+position: absolute;
+inset: 0;
+opacity: 0;
+transition: opacity 1s ease;
+}
+.hero-slide.active { opacity: 1; }
+.hero-slide img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+.hero-slide::after {
+content: '';
+position: absolute;
+inset: 0;
+z-index: 1;
+background:
+  linear-gradient(90deg, rgba(77,52,111,.88) 0%, rgba(77,52,111,.6) 38%, rgba(77,52,111,.1) 72%, rgba(77,52,111,.25) 100%),
+  linear-gradient(0deg, rgba(0,0,0,.4), transparent 45%);
+}
+.hero-slide .hero-content {
+position: absolute;
+z-index: 3;
+left: 6%;
+top: 50%;
+transform: translateY(-50%);
+max-width: 520px;
+color: #fff;
+}
+.hero-content .eyebrow {
+display: inline-flex;
+align-items: center;
+gap: 8px;
+margin-bottom: 14px;
+padding: 6px 12px;
+background: var(--accent);
+color: var(--primary-dark);
+border-radius: 3px;
+font: 600 .66rem/1 'Oswald', sans-serif;
+letter-spacing: 2px;
+text-transform: uppercase;
+}
+.hero-content h1 {
+font-size: clamp(2.2rem, 5.2vw, 4.4rem);
+line-height: .98;
+margin-bottom: 14px;
+letter-spacing: 0.5px;
+text-shadow: 0 5px 25px rgba(0,0,0,.4);
+font-family: 'Cormorant Garamond', serif;
+font-weight: 700;
+}
+.hero-content h1 span { color: var(--accent); font-style: italic; }
+.hero-content p {
+max-width: 470px;
+font-size: clamp(.82rem, 1.4vw, 1rem);
+line-height: 1.6;
+color: rgba(255,255,255,.92);
+margin-bottom: 22px;
+font-weight: 300;
+}
+.hero-cta {
+border: 0;
+background: var(--accent);
+color: var(--primary-dark);
+padding: 14px 26px;
+border-radius: 3px;
+font: 700 .74rem 'Oswald', sans-serif;
+text-transform: uppercase;
+letter-spacing: 2px;
+cursor: pointer;
+box-shadow: 0 8px 24px rgba(232,180,200,.4);
+transition: transform .15s, filter .15s;
+}
+.hero-cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
+.hero-cta i { margin-left: 6px; }
+.hero-dots {
+position: absolute;
+bottom: 18px;
+left: 0; right: 0;
+display: flex;
+justify-content: center;
+gap: 6px;
+z-index: 4;
+}
+.hero-dot {
+width: 7px; height: 7px;
+border-radius: 50%;
+background: rgba(255,255,255,0.55);
+border: none;
+padding: 0;
+cursor: pointer;
+transition: background 0.2s, width 0.2s;
+}
+.hero-dot.active { background: var(--accent); width: 24px; border-radius: 4px; }
+/* Secciones */
+.section-title {
+padding: 32px 16px 14px;
+display: flex;
+justify-content: space-between;
+align-items: flex-end;
+}
+.section-title h2 { font-size: 1.6rem; letter-spacing: 0.5px; color: var(--primary); font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+.section-title h2::first-letter { color: var(--accent-dark); font-style: italic; }
+.section-title span { font-size: 0.75rem; color: var(--dim); font-style: italic; font-family: 'Cormorant Garamond', serif; }
+.link-btn {
+background: none; border: none;
+color: var(--accent-dark);
+font-size: 0.68rem;
+font-weight: 700;
+text-transform: uppercase;
+cursor: pointer;
+font-family: 'Oswald', sans-serif;
+letter-spacing: 1.6px;
+display: flex;
+align-items: center;
+gap: 5px;
+white-space: nowrap;
+}
+.link-btn i { font-size: 0.6rem; }
+.promo-scroll, .cat-scroll {
+display: flex;
+gap: 12px;
+overflow-x: auto;
+padding: 0 16px 16px;
+scroll-snap-type: x mandatory;
+scrollbar-width: none;
+}
+.promo-scroll::-webkit-scrollbar, .cat-scroll::-webkit-scrollbar { display: none; }
+.promo-card {
+flex: 0 0 88%;
+scroll-snap-align: start;
+border-radius: 12px;
+overflow: hidden;
+aspect-ratio: 4/3;
+position: relative;
+cursor: pointer;
+background: var(--surface);
+box-shadow: 0 10px 30px rgba(107,76,154,.12);
+}
+.promo-card img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+.promo-body {
+position: absolute;
+bottom: 0;
+left: 0;
+right: 0;
+padding: 44px 22px 20px;
+background: linear-gradient(to top, rgba(77,52,111,.94), rgba(77,52,111,.5) 55%, transparent 100%);
+color: #fff;
+z-index: 1;
+}
+.promo-body .badge {
+font-size: 0.58rem;
+font-weight: 600;
+background: var(--accent);
+color: var(--primary-dark);
+padding: 4px 10px;
+border-radius: 3px;
+align-self: flex-start;
+margin-bottom: 8px;
+display: inline-block;
+font-family: 'Oswald', sans-serif;
+letter-spacing: 1.4px;
+}
+.promo-body strong {
+display: block;
+font-size: 1.3rem;
+font-family: 'Cormorant Garamond', serif;
+text-transform: none;
+letter-spacing: 0.3px;
+line-height: 1.15;
+margin-bottom: 4px;
+font-weight: 700;
+font-style: italic;
+}
+.promo-body p {
+font-size: 0.78rem;
+opacity: 0.95;
+margin: 0;
+font-weight: 300;
+}
+.cat-card {
+flex: 0 0 42%;
+scroll-snap-align: start;
+aspect-ratio: 3/4;
+border-radius: 10px;
+overflow: hidden;
+position: relative;
+cursor: pointer;
+box-shadow: 0 10px 30px rgba(107,76,154,.1);
+}
+.cat-card img { width: 100%; height: 100%; object-fit: cover; }
+.cat-card span {
+position: absolute; bottom: 0; left: 0; right: 0;
+padding: 16px;
+background: linear-gradient(transparent, rgba(77,52,111,.92));
+color: #fff;
+font-family: 'Oswald', sans-serif;
+font-size: 1rem;
+text-transform: uppercase;
+letter-spacing: 1.4px;
+font-weight: 500;
+}
+/* Grid productos */
+.filters {
+display: flex;
+gap: 8px;
+padding: 0 16px 16px;
+overflow-x: auto;
+scrollbar-width: none;
+}
+#shop-filters {
+position: sticky;
+top: var(--header-h);
+z-index: 1500;
+background: var(--bg);
+padding-top: 12px;
+box-shadow: 0 6px 10px -8px rgba(107,76,154,0.15);
+}
+.filter-chip {
+flex-shrink: 0;
+display: inline-flex;
+align-items: center;
+gap: 7px;
+padding: 6px 8px 6px 16px;
+border-radius: 100px;
+border: 1px solid var(--border);
+background: #fff;
+transition: all .15s;
+}
+.filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.filter-chip-btn {
+border: none;
+background: none;
+padding: 0;
+font-size: 0.7rem;
+font-weight: 600;
+text-transform: uppercase;
+cursor: pointer;
+font-family: 'Oswald', sans-serif;
+letter-spacing: 1px;
+color: inherit;
+white-space: nowrap;
+}
+.filter-chip-count {
+font-size: 0.6rem;
+font-weight: 700;
+background: rgba(107,76,154,0.08);
+color: inherit;
+padding: 3px 8px;
+border-radius: 100px;
+font-family: 'Oswald', sans-serif;
+}
+.filter-chip.active .filter-chip-count { background: rgba(255,255,255,0.25); }
+.filter-chip-share {
+width: 24px;
+height: 24px;
+flex-shrink: 0;
+border-radius: 50%;
+border: none;
+background: rgba(107,76,154,0.08);
+color: inherit;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+font-size: 0.6rem;
+}
+.filter-chip.active .filter-chip-share { background: rgba(255,255,255,0.25); }
+.card-float-share {
+position: absolute;
+top: 10px; right: 10px;
+width: 32px; height: 32px;
+border-radius: 50%;
+border: none;
+background: rgba(255,255,255,0.94);
+color: var(--primary);
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+font-size: 0.75rem;
+z-index: 2;
+box-shadow: 0 2px 8px rgba(107,76,154,.15);
+}
+.grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 14px;
+padding: 0 16px 24px;
+}
+.card { width: 100%; text-align: left; }
+.card-img-btn, .card-info {
+display: block;
+width: 100%;
+border: none;
+background: none;
+padding: 0;
+text-align: left;
+font-family: inherit;
+color: inherit;
+cursor: pointer;
+}
+.card-img {
+aspect-ratio: 4/5;
+border-radius: 10px;
+overflow: hidden;
+background: var(--surface);
+margin-bottom: 10px;
+position: relative;
+box-shadow: 0 10px 30px rgba(107,76,154,.1);
+}
+.card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
+.card:hover .card-img img { transform: scale(1.04); }
+.brand-tag {
+position: absolute;
+top: 10px;
+left: 10px;
+background: rgba(255,255,255,0.96);
+color: var(--primary);
+font-family: 'Oswald', sans-serif;
+font-size: 0.55rem;
+font-weight: 700;
+letter-spacing: 1.2px;
+text-transform: uppercase;
+padding: 4px 10px;
+border-radius: 100px;
+z-index: 2;
+border-left: 2px solid var(--accent-dark);
+}
+.card h4 {
+font-size: 0.9rem;
+font-weight: 600;
+line-height: 1.3;
+margin-bottom: 4px;
+font-family: 'Cormorant Garamond', serif;
+color: var(--primary);
+letter-spacing: 0.2px;
+}
+.card .sku { font-size: 0.6rem; color: var(--muted); letter-spacing: 0.5px; margin-bottom: 4px; }
+.card .row { display: flex; justify-content: space-between; align-items: center; }
+.card .price { font-weight: 600; font-size: 0.95rem; color: var(--accent-dark); font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+.card-actions { display: flex; flex-direction: column; gap: 7px; margin-top: 10px; }
+.card-actions-row { display: flex; gap: 6px; }
+.card-btn {
+width: 100%;
+min-width: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+background: var(--primary);
+color: #fff;
+border: none;
+border-radius: 6px;
+padding: 0 8px;
+height: 36px;
+font-size: 0.64rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1px;
+font-family: 'Oswald', sans-serif;
+cursor: pointer;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+transition: background .15s;
+}
+.card-btn:hover { background: var(--accent-dark); }
+.card-btn-wa {
+flex: 1;
+min-width: 0;
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 6px;
+background: rgba(37,211,102,0.1);
+color: #1a8a45;
+border: 1px solid rgba(37,211,102,0.28);
+border-radius: 6px;
+padding: 0 8px;
+height: 34px;
+font-size: 0.62rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 0.8px;
+font-family: 'Oswald', sans-serif;
+cursor: pointer;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+.card-icon-btn {
+width: 34px;
+height: 34px;
+flex-shrink: 0;
+border-radius: 6px;
+border: 1px solid var(--border);
+background: #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+color: var(--primary);
+font-size: 0.82rem;
+}
+.card-icon-btn:hover { border-color: var(--accent-dark); color: var(--accent-dark); }
+/* Producto */
+#view-product { padding-bottom: 100px; }
+.pd-topbar {
+position: fixed;
+top: 0; left: 0; right: 0;
+height: 56px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 12px;
+background: rgba(107,76,154,0.98);
+backdrop-filter: blur(12px);
+z-index: 2100;
+border-bottom: 1px solid rgba(232,180,200,0.3);
+color: #fff;
+}
+.pd-topbar .icon-btn { color: #fff; }
+.pd-gallery { background: var(--surface); }
+.pd-main-img { width: 100%; aspect-ratio: 4/5; object-fit: cover; display: block; }
+.pd-thumbs { display: flex; gap: 8px; padding: 12px 16px; overflow-x: auto; }
+.pd-thumb {
+flex-shrink: 0;
+width: 64px;
+height: 80px;
+border-radius: 8px;
+overflow: hidden;
+border: 2px solid transparent;
+cursor: pointer;
+padding: 0;
+background: none;
+}
+.pd-thumb.active { border-color: var(--accent-dark); }
+.pd-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.pd-body { padding: 20px 16px; max-width: 720px; margin: 0 auto; }
+.pd-breadcrumb { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; font-family: 'Oswald', sans-serif; }
+.pd-breadcrumb button { background: none; border: none; color: var(--accent-dark); cursor: pointer; font-size: inherit; }
+.pd-name { font-size: 1.8rem; line-height: 1.15; margin-bottom: 8px; color: var(--primary); font-family: 'Cormorant Garamond', serif; }
+.pd-sku { font-size: 0.75rem; color: var(--muted); margin-bottom: 12px; }
+.pd-sku code { background: var(--surface); padding: 2px 8px; border-radius: 4px; font-family: monospace; }
+.pd-price { font-size: 1.7rem; font-weight: 700; color: var(--accent-dark); margin-bottom: 4px; font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+.pd-stock { font-size: 0.75rem; color: #2d7a4f; margin-bottom: 20px; }
+.opt-label { font-size: 0.68rem; font-weight: 700; letter-spacing: 1.6px; margin-bottom: 10px; font-family: 'Oswald', sans-serif; text-transform: uppercase; color: var(--primary); }
+.colors, .sizes { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 22px; }
+.color-btn {
+width: 38px; height: 38px;
+border-radius: 50%;
+border: 2px solid var(--border);
+cursor: pointer;
+}
+.color-btn.active { box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--accent-dark); }
+.size-btn {
+min-width: 48px; height: 48px;
+border: 1px solid var(--border);
+background: #fff;
+border-radius: 6px;
+font-weight: 600;
+cursor: pointer;
+font-family: 'Oswald', sans-serif;
+}
+.size-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.pd-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--border); margin: 24px 0 16px; }
+.pd-tab {
+flex: 1;
+padding: 12px;
+border: none;
+background: none;
+font-size: 0.72rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 1px;
+color: var(--muted);
+cursor: pointer;
+border-bottom: 2px solid transparent;
+margin-bottom: -1px;
+font-family: 'Oswald', sans-serif;
+}
+.pd-tab.active { color: var(--primary); border-bottom-color: var(--accent-dark); }
+.pd-panel { display: none; font-size: 0.9rem; line-height: 1.75; color: var(--dim); }
+.pd-panel.active { display: block; }
+.detail-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+.detail-table td { padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+.detail-table td:first-child { color: var(--muted); width: 40%; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.72rem; }
+.combine-section { padding: 28px 0 0; border-top: 1px solid var(--border); margin-top: 28px; }
+.combine-section h3 { font-size: 1.4rem; margin-bottom: 4px; color: var(--primary); font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+.combine-section p { font-size: 0.8rem; color: var(--dim); margin-bottom: 16px; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+.combine-scroll { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 8px; scrollbar-width: none; }
+.combine-card { flex: 0 0 130px; cursor: pointer; border: none; background: none; text-align: left; padding: 0; font-family: inherit; }
+.combine-card img { width: 100%; aspect-ratio: 3/4; object-fit: cover; border-radius: 8px; margin-bottom: 8px; }
+.combine-card span { font-size: 0.78rem; font-weight: 600; display: block; font-family: 'Cormorant Garamond', serif; color: var(--primary); }
+.combine-card em { font-size: 0.72rem; color: var(--accent-dark); font-style: normal; font-weight: 700; font-family: 'Oswald', sans-serif; }
+.pd-sticky-bar {
+position: fixed;
+bottom: calc(var(--tab-h) + var(--safe-b));
+left: 0; right: 0;
+padding: 12px 16px;
+background: #fff;
+border-top: 1px solid var(--border);
+z-index: 2050;
+display: flex;
+gap: 12px;
+align-items: center;
+}
+body.product-open .pd-sticky-bar { bottom: var(--safe-b); }
+body.desktop.product-open .pd-sticky-bar { bottom: 0; }
+.pd-sticky-bar .price-mini { font-weight: 700; font-size: 1rem; flex: 1; color: var(--accent-dark); font-family: 'Oswald', sans-serif; }
+.btn-add {
+flex: 2;
+background: var(--primary);
+color: #fff;
+border: none;
+padding: 14px 20px;
+border-radius: 6px;
+font-weight: 600;
+font-size: 0.72rem;
+letter-spacing: 1.4px;
+text-transform: uppercase;
+cursor: pointer;
+font-family: 'Oswald', sans-serif;
+transition: background .15s;
+}
+.btn-add:hover { background: var(--accent-dark); }
+/* Nosotros */
+.about-hero {
+background:
+  linear-gradient(120deg, rgba(77,52,111,.96), rgba(77,52,111,.85)),
+  radial-gradient(circle at 80% 20%, rgba(232,180,200,.5), transparent 50%);
+color: #fff;
+padding: 48px 24px;
+text-align: center;
+position: relative;
+overflow: hidden;
+}
+.about-hero::after {
+content: 'MODA FEMENINA';
+position: absolute;
+right: -30px; bottom: -40px;
+font: 700 3.8rem/1 'Cormorant Garamond', serif;
+color: rgba(232,180,200,.15);
+letter-spacing: 4px;
+font-style: italic;
+}
+.about-hero h1 { font-size: 2.4rem; margin-bottom: 8px; position: relative; z-index: 1; font-family: 'Cormorant Garamond', serif; font-weight: 700; letter-spacing: 1px; }
+.about-hero p { color: rgba(255,255,255,.9); position: relative; z-index: 1; font-weight: 300; font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 1rem; }
+.about-content { padding: 24px 16px; max-width: 640px; margin: 0 auto; }
+.about-block { margin-bottom: 32px; }
+.about-block h3 { font-size: 1.5rem; margin-bottom: 12px; color: var(--primary); font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+.about-block p { font-size: 0.9rem; line-height: 1.8; color: var(--dim); }
+.about-info { display: grid; gap: 12px; margin-top: 20px; }
+.info-card {
+display: flex;
+gap: 14px;
+padding: 16px;
+background: #fff;
+border: 1px solid var(--border);
+border-radius: 10px;
+align-items: flex-start;
+box-shadow: 0 4px 18px rgba(107,76,154,.05);
+}
+.info-card i { color: var(--accent-dark); font-size: 1.1rem; margin-top: 2px; }
+.info-card strong { display: block; font-size: 0.85rem; margin-bottom: 4px; font-family: 'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); }
+.info-card span { font-size: 0.8rem; color: var(--dim); }
+/* Portafolio */
+.portfolio-section { margin-bottom: 28px; }
+.portfolio-intro { font-size: 0.88rem; color: var(--dim); line-height: 1.7; margin: 6px 0 16px; font-style: italic; font-family: 'Cormorant Garamond', serif; }
+.portfolio-filters { padding: 0 0 14px; }
+.portfolio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.portfolio-card-wrap { position: relative; }
+.portfolio-card {
+position: relative;
+cursor: pointer;
+border: none;
+padding: 0;
+background: var(--surface);
+font-family: inherit;
+text-align: left;
+border-radius: 10px;
+overflow: hidden;
+aspect-ratio: 1/1;
+width: 100%;
+display: block;
+}
+.portfolio-card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.45s ease; }
+.portfolio-card:hover img { transform: scale(1.05); }
+.portfolio-overlay {
+position: absolute; inset: 0;
+background: linear-gradient(transparent 42%, rgba(77,52,111,.94));
+display: flex;
+flex-direction: column;
+justify-content: flex-end;
+padding: 14px;
+color: #fff;
+text-align: left;
+}
+.portfolio-overlay .badge {
+font-size: 0.55rem;
+font-weight: 600;
+background: var(--accent);
+color: var(--primary-dark);
+padding: 3px 9px;
+border-radius: 3px;
+align-self: flex-start;
+margin-bottom: 6px;
+font-family: 'Oswald', sans-serif;
+letter-spacing: 1.2px;
+}
+.portfolio-overlay strong {
+display: block;
+font-size: 0.9rem;
+font-family: 'Cormorant Garamond', serif;
+letter-spacing: 0.3px;
+line-height: 1.25;
+font-weight: 600;
+font-style: italic;
+}
+.portfolio-overlay span { font-size: 0.65rem; opacity: 0.85; display: block; margin-top: 3px; font-weight: 300; }
+.portfolio-overlay span i { margin-right: 4px; }
+/* Modal */
+.pf-modal-overlay {
+position: fixed; inset: 0;
+background: rgba(77,52,111,0.7);
+z-index: 4000;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.25s;
+}
+.pf-modal-overlay.show { opacity: 1; visibility: visible; }
+.pf-modal {
+position: fixed;
+left: 50%; top: 50%;
+transform: translate(-50%,-50%) scale(0.96);
+width: min(560px, 92vw);
+max-height: 88vh;
+overflow-y: auto;
+background: #fff;
+border-radius: 14px;
+z-index: 4100;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.25s, transform 0.25s;
+}
+.pf-modal.show { opacity: 1; visibility: visible; transform: translate(-50%,-50%) scale(1); }
+.pf-modal-img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+.pf-modal-thumbs { display: flex; gap: 8px; padding: 12px 22px 0; overflow-x: auto; scrollbar-width: none; }
+.pf-modal-thumbs:empty { display: none; padding: 0; }
+.pf-modal-thumb {
+flex-shrink: 0;
+width: 64px;
+height: 64px;
+border-radius: 6px;
+overflow: hidden;
+border: 2px solid transparent;
+cursor: pointer;
+padding: 0;
+background: none;
+}
+.pf-modal-thumb.active { border-color: var(--accent-dark); }
+.pf-modal-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.pf-modal-body { padding: 22px; }
+.pf-modal-close {
+position: absolute; top: 12px; right: 12px;
+width: 36px; height: 36px; border-radius: 50%;
+background: rgba(255,255,255,0.94); border: none;
+display: flex; align-items: center; justify-content: center;
+cursor: pointer; z-index: 2; color: var(--primary);
+}
+.pf-modal-cat { font-size: 0.65rem; font-weight: 700; letter-spacing: 1.6px; text-transform: uppercase; color: var(--accent-dark); font-family: 'Oswald', sans-serif; margin-bottom: 8px; }
+.pf-modal-body h3 { font-size: 1.5rem; margin-bottom: 10px; color: var(--primary); font-family: 'Cormorant Garamond', serif; font-weight: 700; }
+.pf-modal-body p.pf-modal-desc { font-size: 0.88rem; line-height: 1.75; color: var(--dim); margin-bottom: 20px; }
+@media (min-width: 769px) {
+.portfolio-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+}
+/* Carrito */
+.cart-panel {
+position: fixed;
+top: 0; right: -100%;
+width: min(400px, 100%);
+height: 100dvh;
+background: #fff;
+z-index: 2700;
+transition: right 0.35s;
+display: flex;
+flex-direction: column;
+padding: 20px 16px calc(20px + var(--safe-b));
+}
+.cart-panel.open { right: 0; }
+.cart-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+.cart-item img { width: 56px; height: 72px; object-fit: cover; border-radius: 6px; }
+.cart-footer { margin-top: auto; padding-top: 16px; border-top: 1px solid var(--border); }
+.btn-wa {
+width: 100%;
+padding: 14px;
+background: var(--wa);
+color: #fff;
+border: none;
+border-radius: 6px;
+font-weight: 600;
+cursor: pointer;
+margin-top: 12px;
+font-family: 'Oswald', sans-serif;
+text-transform: uppercase;
+letter-spacing: 1.4px;
+font-size: 0.75rem;
+}
+/* Bottom nav */
+.bottom-nav {
+position: fixed;
+bottom: 0; left: 0; right: 0;
+height: calc(var(--tab-h) + var(--safe-b));
+padding-bottom: var(--safe-b);
+background: var(--primary);
+border-top: 1px solid rgba(232,180,200,0.25);
+display: flex;
+z-index: 2000;
+box-shadow: 0 -10px 28px rgba(77,52,111,.2);
+}
+.tab {
+flex: 1;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+gap: 3px;
+border: none;
+background: none;
+color: rgba(255,255,255,0.6);
+font-size: 0.55rem;
+font-weight: 600;
+text-transform: uppercase;
+cursor: pointer;
+padding: 6px 2px;
+font-family: 'Oswald', sans-serif;
+letter-spacing: 0.8px;
+}
+.tab i { font-size: 1.1rem; }
+.tab.active { color: var(--accent); }
+.tab.active i { color: var(--accent); }
+.toast {
+position: fixed;
+bottom: calc(var(--tab-h) + var(--safe-b) + 80px);
+left: 50%;
+transform: translateX(-50%) translateY(20px);
+background: var(--primary);
+color: #fff;
+padding: 12px 22px;
+border-radius: 100px;
+font-size: 0.78rem;
+z-index: 9999;
+opacity: 0;
+transition: 0.3s;
+pointer-events: none;
+font-family: 'Oswald', sans-serif;
+text-transform: uppercase;
+letter-spacing: 1.4px;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.empty { text-align: center; padding: 48px 20px; color: var(--muted); grid-column: 1 / -1; }
+/* WhatsApp flotante */
+.wa-float-wrap {
+position: fixed;
+right: 16px;
+bottom: calc(var(--tab-h) + var(--safe-b) + 20px);
+z-index: 3500;
+display: flex;
+flex-direction: column;
+align-items: flex-end;
+gap: 10px;
+pointer-events: none;
+}
+.wa-float-wrap > * { pointer-events: auto; }
+.wa-float-msg {
+background: #fff;
+color: var(--text);
+font-size: 0.78rem;
+line-height: 1.4;
+padding: 10px 14px;
+border-radius: 12px 12px 4px 12px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+border: 1px solid var(--border);
+max-width: 210px;
+font-weight: 500;
+}
+.wa-float-btn {
+width: 56px;
+height: 56px;
+border-radius: 50%;
+background: var(--wa);
+color: #fff;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 28px;
+box-shadow: 0 8px 26px rgba(37,211,102,.3);
+border: none;
+cursor: pointer;
+transition: transform 0.2s;
+}
+.wa-float-btn:hover { transform: scale(1.06); }
+body.product-open .wa-float-wrap { bottom: calc(80px + var(--safe-b)); }
+.footer-dev { color: rgba(255,255,255,0.5); font-size: 0.75rem; text-decoration: none; transition: color 0.2s; }
+.footer-dev:hover { color: var(--accent); }
+.footer-dev strong { color: rgba(255,255,255,0.9); letter-spacing: 1px; }
+.pd-actions-desktop { display: none; margin-top: 24px; }
+.pd-actions-desktop .btn-add { width: 100%; max-width: 360px; }
+.pd-combine-wrap { max-width: 1200px; margin: 0 auto; padding: 0 16px 24px; }
+/* Footer */
+.site-footer {
+background: var(--primary);
+color: #fff;
+padding: 48px 32px 28px;
+margin-top: 48px;
+}
+.site-footer-inner {
+max-width: 1280px;
+margin: 0 auto;
+display: grid;
+grid-template-columns: 1.2fr 1fr 1fr;
+gap: 40px;
+padding-bottom: 32px;
+border-bottom: 1px solid rgba(232,180,200,0.2);
+}
+.site-footer h3 { font-size: 1.6rem; letter-spacing: 4px; margin-bottom: 14px; color: #fff; font-weight: 600; font-family: 'Oswald', sans-serif; }
+.site-footer h3::first-letter { color: var(--accent); }
+.site-footer p { font-size: 0.85rem; opacity: 0.8; line-height: 1.75; font-weight: 300; }
+.site-footer h4 { font-size: 0.68rem; letter-spacing: 2.4px; text-transform: uppercase; margin-bottom: 14px; opacity: 0.6; font-family: 'Oswald', sans-serif; color: var(--accent); }
+.site-footer ul { list-style: none; }
+.site-footer li { margin-bottom: 10px; }
+.site-footer button, .site-footer a {
+background: none; border: none; color: rgba(255,255,255,0.85);
+font-size: 0.85rem; cursor: pointer; text-decoration: none;
+font-family: inherit; padding: 0;
+}
+.site-footer button:hover, .site-footer a:hover { color: var(--accent); }
+.site-footer-bottom {
+max-width: 1280px;
+margin: 24px auto 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
+font-size: 0.75rem;
+opacity: 0.55;
+}
+/* Escritorio */
+@media (min-width: 769px) {
+.mobile-only { display: none !important; }
+.desktop-only { display: block; }
+body { padding-top: 0; padding-bottom: 0; background: #fff; }
+body.product-open { padding-top: 0; padding-bottom: 0; }
+.bottom-nav { display: none; }
+.app-header { position: sticky; top: 0; }
+.announcement { font-size: 0.62rem; padding: 10px; }
+.header-mobile { display: none !important; }
+.header-desktop {
+display: grid !important;
+grid-template-columns: 1fr auto 1fr;
+align-items: center;
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px 24px 22px;
+gap: 24px;
+}
+.header-nav-left { display: flex; align-items: center; justify-content: flex-end; gap: 32px; }
+.logo-center { font-size: 2rem; justify-self: center; grid-column: 2; letter-spacing: 5px; }
+.header-nav-right { display: flex; align-items: center; justify-content: flex-start; gap: 14px; }
+.header-nav-right .search-sticky { flex: 1; max-width: 300px; border-radius: 4px; }
+.desktop-nav { display: flex; align-items: center; gap: 32px; }
+.desktop-nav button {
+background: none;
+border: none;
+font-size: 0.75rem;
+font-weight: 600;
+text-transform: uppercase;
+letter-spacing: 2px;
+cursor: pointer;
+color: rgba(255,255,255,0.85);
+padding: 4px 0;
+position: relative;
+white-space: nowrap;
+font-family: 'Oswald', sans-serif;
+}
+.desktop-nav button:hover { color: var(--accent); }
+.desktop-nav button.active { color: #fff; }
+.desktop-nav button.active::after {
+content: '';
+position: absolute;
+bottom: -6px;
+left: 0; right: 0;
+height: 2px;
+background: var(--accent);
+}
+.wa-float-wrap { bottom: 28px; }
+body.product-open .wa-float-wrap { bottom: 28px; }
+.view { min-height: auto; }
+.hero-carousel { margin: 24px auto 0; border-radius: 14px; max-width: 1200px; aspect-ratio: 2/1; }
+.section-title { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
+.filters { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
+.promo-scroll, .cat-scroll { max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 24px; padding-right: 24px; }
+.grid {
+grid-template-columns: repeat(4, 1fr);
+gap: 26px;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 24px 48px;
+}
+.cat-scroll { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; overflow: visible; }
+.cat-card { flex: unset; max-width: none; }
+.promo-scroll { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; overflow: visible; }
+.promo-card { flex: unset; aspect-ratio: 4/3; height: auto; min-height: 0; }
+.about-hero { max-width: 1200px; margin: 24px auto 0; border-radius: 14px; padding: 64px 32px; }
+.about-hero h1 { font-size: 3.2rem; }
+.about-content { max-width: 720px; padding: 48px 24px 80px; }
+.about-info { grid-template-columns: 1fr 1fr; }
+.site-footer-inner, .site-footer-bottom { max-width: 1200px; }
+#view-product { padding-bottom: 0; }
+.pd-page-wrap {
+max-width: 1200px;
+margin: 0 auto;
+padding: 32px 24px 0;
+display: grid;
+grid-template-columns: 1.05fr 0.95fr;
+gap: 56px;
+align-items: start;
+}
+.pd-gallery { background: transparent; }
+.pd-main-img { border-radius: 10px; aspect-ratio: 4/5; }
+.pd-thumbs { padding: 16px 0; }
+.pd-body { padding: 0; max-width: none; }
+.pd-name { font-size: 2.4rem; }
+.pd-sticky-bar { display: none !important; }
+.pd-actions-desktop { display: block; }
+.combine-section { margin-top: 0; padding-top: 0; border: none; }
+.combine-scroll { display: grid; grid-template-columns: repeat(4, 1fr); overflow: visible; gap: 16px; }
+.combine-card { flex: unset; }
+.pd-combine-wrap { max-width: 1200px; padding: 0 24px 48px; }
+.pd-combine-wrap .combine-section h3 { font-size: 1.6rem; }
+.cart-panel { max-width: 440px; }
+.toast { bottom: 32px; }
+body.product-open #app-header { display: block !important; }
+}
+.header-desktop { display: none; }
+@media (max-width: 768px) {
+.site-footer { display: none; }
+body.product-open .bottom-nav { display: none; }
+body.product-open { padding-bottom: calc(72px + var(--safe-b)); }
+.hero-content h1 { font-size: 2.1rem; }
+.hero-content p { font-size: .78rem; margin-bottom: 14px; max-width: 320px; }
+.hero-cta { padding: 11px 16px; font-size: .66rem; }
+.hero-slide .hero-content { left: 20px; right: 20px; top: auto; bottom: 44px; transform: none; max-width: none; }
+.hero-content .eyebrow { font-size: .56rem; margin-bottom: 8px; }
+.hero-carousel { aspect-ratio: 4/4.2; }
+.logo-btn { font-size: 1.05rem; letter-spacing: 3px; }
+}
+</style>
+</head>
+<body>
+<header class="app-header" id="app-header">
+<div class="announcement"> MODA FEMENINA · CAMISAS · SACOS · BLÉIZER · PANTALONES DE VESTIR</div>
+<div class="header-inner">
+<div class="header-row header-mobile">
+<button type="button" class="logo-btn" onclick="App.go('home')">MODA FEMENINA</button>
+<div class="search-sticky">
+<i class="fas fa-search"></i>
+<input type="search" id="search-input" placeholder="Buscar camisas, sacos..." autocomplete="off">
+</div>
+<button type="button" class="icon-btn" onclick="App.sharePage()" aria-label="Compartir página"><i class="fas fa-share-alt"></i></button>
+<button type="button" class="icon-btn cart-btn" onclick="App.openCart()" aria-label="Bolsa">
+<i class="fas fa-shopping-bag"></i>
+<span class="cart-badge" id="cart-badge">0</span>
+</button>
+</div>
+<div class="header-desktop">
+<nav class="desktop-nav header-nav-left">
+<button type="button" data-nav="home" onclick="App.go('home')">Inicio</button>
+<button type="button" data-nav="shop" onclick="App.go('shop')">Catálogo</button>
+<button type="button" data-nav="about" onclick="App.go('about')">Nosotros</button>
+</nav>
+<button type="button" class="logo-btn logo-center" onclick="App.go('home')">MODA FEMENINA</button>
+<div class="header-nav-right">
+<div class="search-sticky">
+<i class="fas fa-search"></i>
+<input type="search" id="search-input-desktop" placeholder="Buscar camisas, sacos..." autocomplete="off">
+</div>
+<button type="button" class="icon-btn" onclick="App.sharePage()" aria-label="Compartir página"><i class="fas fa-share-alt"></i></button>
+<button type="button" class="icon-btn cart-btn" onclick="App.openCart()" aria-label="Bolsa">
+<i class="fas fa-shopping-bag"></i>
+<span class="cart-badge" id="cart-badge-desk">0</span>
+</button>
+</div>
+</div>
+</div>
+</header>
+<div class="overlay" id="overlay" onclick="App.closeAll()"></div>
+<aside class="menu-sidebar" id="menu-sidebar">
+<div class="menu-head">
+<h2>Menú</h2>
+<button type="button" class="icon-btn" onclick="App.closeMenu()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+</div>
+<div class="menu-body" id="menu-content"></div>
+<div class="menu-footer">
+<a id="developer-link" href="#" target="_blank" rel="noopener noreferrer">
+Desarrollado por <strong>KEY STUDIO</strong>
+</a>
+</div>
+</aside>
+<main id="view-home" class="view active">
+<div class="hero-carousel" id="hero-carousel"></div>
+<div class="section-title">
+<div><h2>Promociones</h2><span>Ofertas activas</span></div>
+</div>
+<div class="promo-scroll" id="home-promos"></div>
+<div class="section-title">
+<div><h2>Categorías</h2></div>
+<button type="button" class="link-btn" onclick="App.go('shop')">Ver catálogo <i class="fas fa-arrow-right"></i></button>
+</div>
+<div class="cat-scroll" id="home-cats"></div>
+<div class="section-title"><h2>Nuestros Destacados</h2></div>
+<div class="grid" id="home-featured"></div>
+</main>
+<main id="view-shop" class="view">
+<div class="section-title">
+<div><h2>Catálogo</h2><span id="shop-count"></span></div>
+</div>
+<div class="filters" id="shop-filters"></div>
+<div class="grid" id="shop-grid"></div>
+</main>
+<main id="view-product" class="view">
+<div class="pd-topbar mobile-only" id="pd-topbar">
+<button type="button" class="icon-btn" onclick="App.closeProduct()" aria-label="Volver"><i class="fas fa-arrow-left"></i></button>
+<div style="display:flex;gap:8px;">
+<button type="button" class="icon-btn" onclick="App.shareProduct(App.product && App.product.id)" aria-label="Compartir producto"><i class="fas fa-share-alt"></i></button>
+<button type="button" class="icon-btn cart-btn" onclick="App.openCart()">
+<i class="fas fa-shopping-bag"></i>
+<span class="cart-badge" id="cart-badge-pd">0</span>
+</button>
+</div>
+</div>
+<div class="pd-page-wrap">
+<div class="pd-gallery">
+<img class="pd-main-img" id="pd-main-img" src="" alt="">
+<div class="pd-thumbs" id="pd-thumbs"></div>
+</div>
+<div class="pd-body">
+<p class="pd-breadcrumb">
+<button type="button" onclick="App.go('shop')">Catálogo</button>
+/ <span id="pd-cat-label"></span>
+</p>
+<h1 class="pd-name" id="pd-name"></h1>
+<p class="pd-sku">SKU: <code id="pd-sku"></code></p>
+<p class="pd-price" id="pd-price"></p>
+<p class="pd-stock"><i class="fas fa-check-circle"></i> Disponible · Calidad garantizada</p>
+<button type="button" class="link-btn" style="margin-bottom:16px;display:flex;align-items:center;gap:6px;" onclick="App.shareProduct(App.product && App.product.id)"><i class="fas fa-share-alt"></i> Compartir producto</button>
+<p class="opt-label">Color</p>
+<div class="colors" id="pd-colors"></div>
+<p class="opt-label">Talle</p>
+<div class="sizes" id="pd-sizes"></div>
+<div class="pd-actions-desktop">
+<button type="button" class="btn-add" onclick="App.addToCart()">Agregar al pedido — <span id="pd-price-btn"></span></button>
+</div>
+<div class="pd-tabs">
+<button type="button" class="pd-tab active" data-tab="desc" onclick="App.switchTab('desc')">Descripción</button>
+<button type="button" class="pd-tab" data-tab="details" onclick="App.switchTab('details')">Detalles</button>
+<button type="button" class="pd-tab" data-tab="ship" onclick="App.switchTab('ship')">Entrega</button>
+</div>
+<div class="pd-panel active" id="panel-desc"></div>
+<div class="pd-panel" id="panel-details"></div>
+<div class="pd-panel" id="panel-ship">
+<p>Entrega en tu ciudad y envíos a todo el país. Pedidos procesados en 24-48 h.</p>
+<ul style="margin-top:12px;padding-left:18px;">
+<li>Envío con embalaje cuidado para tus prendas</li>
+<li>Seguimiento de tu pedido por WhatsApp</li>
+<li>Asesoría de estilo personalizada</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="pd-combine-wrap">
+<section class="combine-section">
+<h3>Combínalo con</h3>
+<p>Completá tu look con estas prendas</p>
+<div class="combine-scroll" id="pd-combine"></div>
+</section>
+</div>
+<div class="pd-sticky-bar mobile-only">
+<span class="price-mini" id="pd-price-sticky"></span>
+<button type="button" class="btn-add" onclick="App.addToCart()">Agregar al pedido</button>
+</div>
+</main>
+<main id="view-about" class="view">
+<div class="about-hero">
+<h1>MODA FEMENINA</h1>
+<p>Moda femenina con estilo y elegancia · Bolivia</p>
+</div>
+<div class="about-content" id="about-content"></div>
+</main>
+<aside class="cart-panel" id="cart-panel">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+<h2 style="color:var(--primary);">Mi pedido</h2>
+<button type="button" class="icon-btn" onclick="App.closeCart()" style="background:var(--surface);border-color:var(--border);color:var(--primary);"><i class="fas fa-times"></i></button>
+</div>
+<div id="cart-items" style="flex:1;overflow-y:auto;"></div>
+<div class="cart-footer">
+<div style="display:flex;justify-content:space-between;font-weight:700;font-size:1.1rem;margin-bottom:8px;">
+<span>Total estimado</span><span id="cart-total">Bs. 0</span>
+</div>
+<button type="button" class="btn-wa" onclick="App.whatsapp()"><i class="fab fa-whatsapp"></i> Pedir por WhatsApp</button>
+</div>
+</aside>
+<div class="pf-modal-overlay" id="pf-modal-overlay" onclick="App.closeProjectModal()"></div>
+<div class="pf-modal" id="pf-modal" role="dialog" aria-modal="true" aria-labelledby="pf-modal-title">
+<button type="button" class="pf-modal-close" onclick="App.closeProjectModal()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+<img class="pf-modal-img" id="pf-modal-img" src="" alt="">
+<div class="pf-modal-thumbs" id="pf-modal-thumbs"></div>
+<div class="pf-modal-body">
+<p class="pf-modal-cat" id="pf-modal-cat"></p>
+<h3 id="pf-modal-title"></h3>
+<p class="pf-modal-desc" id="pf-modal-desc"></p>
+<div id="pf-modal-details" style="margin-bottom:20px;"></div>
+<div style="display:flex;gap:10px;">
+<button type="button" class="btn-wa" id="pf-modal-cta" style="margin-top:0;flex:1;"><i class="fab fa-whatsapp"></i> Consultar</button>
+<button type="button" class="card-icon-btn" style="width:48px;height:48px;background:var(--surface);border-color:var(--border);color:var(--primary);" id="pf-modal-share" aria-label="Compartir"><i class="fas fa-share-alt"></i></button>
+</div>
+</div>
+</div>
+<div class="pf-modal-overlay" id="promo-modal-overlay" onclick="App.closePromoModal()"></div>
+<div class="pf-modal" id="promo-modal" role="dialog" aria-modal="true" aria-labelledby="promo-modal-title">
+<button type="button" class="pf-modal-close" onclick="App.closePromoModal()" aria-label="Cerrar"><i class="fas fa-times"></i></button>
+<img class="pf-modal-img" id="promo-modal-img" src="" alt="">
+<div class="pf-modal-body">
+<p class="pf-modal-cat" id="promo-modal-cat"></p>
+<h3 id="promo-modal-title"></h3>
+<p class="pf-modal-desc" id="promo-modal-desc"></p>
+<div id="promo-modal-details" style="margin-bottom:20px;"></div>
+<div style="display:flex;gap:10px;margin-bottom:10px;">
+<button type="button" class="btn-add" id="promo-modal-cta" style="margin-top:0;flex:1;padding:14px 16px;"><i class="fas fa-store"></i> Ver productos</button>
+</div>
+<div style="display:flex;gap:10px;">
+<button type="button" class="btn-wa" id="promo-modal-wa" style="margin-top:0;flex:1;"><i class="fab fa-whatsapp"></i> Consultar promoción</button>
+<button type="button" class="card-icon-btn" style="width:48px;height:48px;background:var(--surface);border-color:var(--border);color:var(--primary);" id="promo-modal-share" aria-label="Compartir promoción"><i class="fas fa-share-alt"></i></button>
+</div>
+</div>
+</div>
+<div class="toast" id="toast"></div>
+<footer class="site-footer desktop-only">
+<div class="site-footer-inner">
+<div>
+<h3>MODA FEMENINA</h3>
+<p>Moda femenina con estilo propio. Camisas, sacos, bléizer y pantalones de vestir pensados para la mujer moderna que valora la elegancia y la calidad.</p>
+</div>
+<div>
+<h4>Navegación</h4>
+<ul>
+<li><button type="button" onclick="App.go('home')">Inicio</button></li>
+<li><button type="button" onclick="App.go('shop')">Catálogo</button></li>
+<li><button type="button" onclick="App.go('about')">Nosotros</button></li>
+</ul>
+</div>
+<div>
+<h4>Contacto</h4>
+<ul>
+<li><button type="button" onclick="App.whatsapp()">WhatsApp: 75179990</button></li>
+<li><span style="opacity:0.85;font-size:0.85rem;">Yacuiba, Bolivia</span></li>
+</ul>
+</div>
+</div>
+<div class="site-footer-bottom">
+<span>© <span id="footer-year"></span> MODA FEMENINA. Todos los derechos reservados.</span>
+<a id="footer-developer" class="footer-dev" href="#" target="_blank" rel="noopener noreferrer">
+Desarrollado por <strong>KEY STUDIO</strong>
+</a>
+</div>
+</footer>
+<div class="wa-float-wrap" id="wa-float-wrap">
+<div class="wa-float-msg">¿Necesitás asesoría de estilo? ¡Escribinos!</div>
+<button type="button" class="wa-float-btn" onclick="App.whatsappHelp()" aria-label="WhatsApp">
+<i class="fab fa-whatsapp"></i>
+</button>
+</div>
+<nav class="bottom-nav" id="bottom-nav">
+<button type="button" class="tab active" data-view="home" onclick="App.go('home')"><i class="fas fa-home"></i><span>Inicio</span></button>
+<button type="button" class="tab" data-view="shop" onclick="App.go('shop')"><i class="fas fa-tshirt"></i><span>Catálogo</span></button>
+<button type="button" class="tab" data-view="menu" onclick="App.openMenu()"><i class="fas fa-bars"></i><span>Menú</span></button>
+<button type="button" class="tab" data-view="about" onclick="App.go('about')"><i class="fas fa-info-circle"></i><span>Nosotros</span></button>
+<button type="button" class="tab" data-view="cart" onclick="App.openCart()"><i class="fas fa-shopping-bag"></i><span>Pedido</span></button>
+</nav>
+<script>
+const CONFIG = {
+phone: '59175179990',
+developer: {
+name: 'KEY STUDIO',
+url: 'https://keystudio.bo'
+},
+store: {
+name: 'MODA FEMENINA',
+tagline: 'Moda femenina con estilo y elegancia',
+story: 'MODA FEMENINA nació con la idea de vestir a la mujer moderna que busca sentirse segura y elegante en cada ocasión. Seleccionamos cada prenda pensando en la calidad, el corte y el detalle, para que encuentres en nuestro catálogo esas piezas que marcan la diferencia.',
+mission: 'Ofrecer moda femenina de calidad con diseños actuales, atención personalizada y una experiencia de compra cálida y cercana. Queremos que cada mujer encuentre en MODA FEMENINA su estilo propio.',
+hours: 'Lun – Sáb: 10:00 – 20:00',
+address: 'Yacuiba, Bolivia',
+email: 'hola@lilarose.bo',
+instagram: '@lila.rose.bo'
+}
+};
+const heroImages = [
+'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1800&q=85',
+'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1800&q=85',
+'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1800&q=85'
+];
+const categories = [
+{ id: 'camisas', name: 'Camisas', image: 'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=600' },
+{ id: 'sacos', name: 'Sacos', image: 'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=600' },
+{ id: 'pantalones', name: 'Pantalones de Vestir', image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600' },
+{ id: 'bleizer', name: 'Bléizer', image: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=600' },
+{ id: 'vestidos', name: 'Vestidos de Fiesta', image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600' },
+{ id: 'accesorios', name: 'Accesorios', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600' }
+];
+const promotions = [
+{ badge: 'NUEVA COLECCIÓN', title: 'Bléizer y Sacos', sub: 'Elegancia atemporal', image: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=1200', cat: 'bleizer',
+fullDescription: 'Nueva colección de bléizers y sacos en telas premium, con cortes entallados y detalles que marcan la diferencia. Perfectos para el trabajo, eventos o el día a día.',
+validUntil: 'Consultar disponibilidad en tienda',
+conditions: ['Precio final según modelo', 'Envío coordinado por WhatsApp', 'Sujeto a stock disponible'] },
+{ badge: 'BÁSICOS', title: 'Camisas Esenciales', sub: 'El básico que nunca falla', image: 'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=1200', cat: 'camisas',
+fullDescription: 'Camisas femeninas en algodón y mezclas premium, disponibles en tonos neutros y colores de temporada. Ideales para combinar en cualquier look.',
+validUntil: 'Consultar disponibilidad',
+conditions: ['Talles del S al XL', 'Colores según stock', 'Cambio dentro de 7 días'] },
+{ badge: 'OFERTA', title: 'Pantalones de Vestir', sub: 'Comodidad y estilo', image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1200', cat: 'pantalones',
+fullDescription: 'Pantalones de vestir femeninos con cortes modernos y telas con elastano para mayor comodidad. Disponibles en negro, gris, beige y azul marino.',
+validUntil: 'Consultar disponibilidad',
+conditions: ['Talles del 36 al 46', 'Varios colores disponibles', 'Sujeto a stock'] }
+];
+const catLabels = { camisas: 'Camisas', sacos: 'Sacos', pantalones: 'Pantalones de Vestir', bleizer: 'Bléizer', vestidos: 'Vestidos de Fiesta', accesorios: 'Accesorios' };
+const catTaglines = {
+camisas: 'El básico que nunca falla',
+sacos: 'Elegancia en cada detalle',
+pantalones: 'Cortes que estilizan',
+bleizer: 'Tu pieza clave del guardarropa',
+vestidos: 'Para las ocasiones especiales',
+accesorios: 'El toque final de tu look'
+};
+const projects = [
+{
+id: 1,
+title: 'Look Ejecutivo Femenino',
+cat: 'sacos',
+location: 'Colección actual',
+client: 'Disponible',
+duration: 'Entrega en 24-48 h',
+image: 'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=900',
+images: [
+'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=1100',
+'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1100'
+],
+description: 'Conjunto de saco entallado + pantalón de vestir + camisa blanca. Un look clásico y sofisticado para la oficina o eventos formales.'
+},
+{
+id: 2,
+title: 'Bléizer Oversize',
+cat: 'bleizer',
+location: 'Colección actual',
+client: 'Disponible',
+duration: 'Entrega en 24-48 h',
+image: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=900',
+images: [
+'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=1100'
+],
+description: 'Bléizer oversize en tono lila empolvado, ideal para looks casuales y elegantes. Combínalo con jeans o pantalones de vestir.'
+},
+{
+id: 3,
+title: 'Camisa de Seda',
+cat: 'camisas',
+location: 'Colección actual',
+client: 'Disponible',
+duration: 'Entrega en 24-48 h',
+image: 'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=900',
+images: [
+'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=1100'
+],
+description: 'Camisa de seda con caída fluida y botones nacarados. Un básico de lujo que realza cualquier look, del trabajo a la noche.'
+},
+{
+id: 4,
+title: 'Pantalón de Vestir Tiro Alto',
+cat: 'pantalones',
+location: 'Colección actual',
+client: 'Disponible',
+duration: 'Entrega en 24-48 h',
+image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=900',
+images: [
+'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=1100'
+],
+description: 'Pantalón de vestir de tiro alto con pinza frontal, corte recto y tela con elastano. Estiliza la figura y es cómodo para todo el día.'
+},
+{
+id: 5,
+title: 'Vestido de Fiesta Elegante',
+cat: 'vestidos',
+location: 'Colección actual',
+client: 'Disponible',
+duration: 'Entrega en 24-48 h',
+image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=900',
+images: [
+'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=1100'
+],
+description: 'Vestido de fiesta en tono rosado con detalles bordados, escote elegante y caída fluida. La pieza perfecta para una ocasión especial.'
+},
+{
+id: 6,
+title: 'Accesorios de Temporada',
+cat: 'accesorios',
+location: 'Colección actual',
+client: 'Disponible',
+duration: 'Entrega en 24-48 h',
+image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900',
+images: [
+'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=1100'
+],
+description: 'Carteras, pañuelos, cinturones y collares seleccionados para complementar tu look con un toque sofisticado.'
+}
+];
+const products = [
+{
+id: 1,
+sku: 'LR-CAM-001',
+name: 'Camisa de Seda',
+brand: 'MODA FEMENINA',
+price: 320,
+cat: 'camisas',
+img: 'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=900',
+images: [
+'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=900',
+'https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=900'
+],
+desc: 'Camisa de seda con caída fluida y botones nacarados.',
+description: '<p>Camisa de <strong>seda natural</strong> con caída fluida, cuello clásico y botones nacarados. Su textura suave y luminosa realza cualquier look.</p><p>Ideal para el trabajo, eventos o para elevar un outfit casual. Disponible en tonos neutros y de temporada.</p>',
+details: { Material: 'Seda natural', Cuello: 'Clásico', Cierre: 'Botones nacarados', Cuidado: 'Lavado a mano' },
+colors: [{ hex: '#f4d9e4', name: 'Rosa empolvado' }, { hex: '#ffffff', name: 'Blanco' }, { hex: '#1e1a24', name: 'Negro' }],
+sizes: ['XS', 'S', 'M', 'L', 'XL'],
+pairsWith: [3, 5]
+},
+{
+id: 2,
+sku: 'LR-SAC-002',
+name: 'Saco Entallado',
+brand: 'MODA FEMENINA',
+price: 580,
+cat: 'sacos',
+img: 'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=900',
+images: [
+'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=900'
+],
+desc: 'Saco entallado de corte clásico, elegante y versátil.',
+description: '<p>Saco entallado de <strong>corte clásico</strong> con hombros estructurados y botonadura simple. Perfecto para el trabajo o eventos formales.</p><p>Confeccionado en mezcla de lana con forro interior satinado. Disponible en tonos neutros y de moda.</p>',
+details: { Material: 'Mezcla de lana', Corte: 'Entallado', Forro: 'Satín', Cuidado: 'Lavado en seco' },
+colors: [{ hex: '#6b4c9a', name: 'Violeta' }, { hex: '#1e1a24', name: 'Negro' }, { hex: '#8b7355', name: 'Beige' }],
+sizes: ['XS', 'S', 'M', 'L', 'XL'],
+pairsWith: [3, 5]
+},
+{
+id: 3,
+sku: 'LR-PAN-003',
+name: 'Pantalón de Vestir Tiro Alto',
+brand: 'MODA FEMENINA',
+price: 380,
+cat: 'pantalones',
+img: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=900',
+images: [
+'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=900'
+],
+desc: 'Pantalón de vestir de tiro alto con pinza frontal.',
+description: '<p>Pantalón de vestir de <strong>tiro alto</strong> con pinza frontal y corte recto. Estiliza la figura y alarga la silueta.</p><p>Confeccionado en tela con elastano para mayor comodidad. Ideal para el trabajo y ocasiones formales.</p>',
+details: { Material: 'Poliéster con elastano', Corte: 'Recto tiro alto', Cierre: 'Cremallera invisible', Cuidado: 'Lavado a máquina' },
+colors: [{ hex: '#1e1a24', name: 'Negro' }, { hex: '#8b7355', name: 'Beige' }, { hex: '#3a4a6b', name: 'Azul marino' }],
+sizes: ['36', '38', '40', '42', '44', '46'],
+pairsWith: [1, 2]
+},
+{
+id: 4,
+sku: 'LR-BLZ-004',
+name: 'Bléizer Oversize',
+brand: 'MODA FEMENINA',
+price: 460,
+cat: 'bleizer',
+img: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=900',
+images: [
+'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=900'
+],
+desc: 'Bléizer oversize de corte moderno, casual y elegante.',
+description: '<p>Bléizer <strong>oversize</strong> de corte moderno y relajado. Hombros caídos y largo a la cadera para un look actual y elegante.</p><p>Perfecto para combinar con jeans, pantalones de vestir o vestidos. Disponible en tonos suaves y de moda.</p>',
+details: { Material: 'Mezcla de poliéster', Corte: 'Oversize', Forro: 'Sí', Cuidado: 'Lavado en seco' },
+colors: [{ hex: '#6b4c9a', name: 'Violeta' }, { hex: '#e8b4c8', name: 'Rosa suave' }, { hex: '#1e1a24', name: 'Negro' }],
+sizes: ['S', 'M', 'L', 'XL'],
+pairsWith: [3, 5]
+},
+{
+id: 5,
+sku: 'LR-VES-005',
+name: 'Vestido de Fiesta Elegante',
+brand: 'MODA FEMENINA',
+price: 620,
+cat: 'vestidos',
+img: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=900',
+images: [
+'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=900'
+],
+desc: 'Vestido de fiesta en tono rosado con detalles bordados.',
+description: '<p>Vestido de fiesta con <strong>detalles bordados</strong> en tono rosado. Escote elegante, corte en la cintura y caída fluida hasta la rodilla.</p><p>La pieza perfecta para una ocasión especial. Combínalo con tacos y accesorios dorados.</p>',
+details: { Material: 'Gasa con bordados', Corte: 'Entallado en cintura', Largo: 'Midi', Cuidado: 'Lavado a mano' },
+colors: [{ hex: '#e8b4c8', name: 'Rosa' }, { hex: '#6b4c9a', name: 'Violeta' }, { hex: '#1e1a24', name: 'Negro' }],
+sizes: ['XS', 'S', 'M', 'L'],
+pairsWith: [6, 1]
+},
+{
+id: 6,
+sku: 'LR-ACC-006',
+name: 'Set de Accesorios Femeninos',
+brand: 'MODA FEMENINA',
+price: 180,
+cat: 'accesorios',
+img: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900',
+images: [
+'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=900'
+],
+desc: 'Set de cartera, pañuelo y collar dorado.',
+description: '<p>Set de <strong>accesorios femeninos</strong>: cartera de mano, pañuelo de seda y collar dorado. El toque final de cualquier look.</p><p>Ideal para regalar o darte un gustito. Disponible en tonos rosados, violetas y neutros.</p>',
+details: { Incluye: 'Cartera + pañuelo + collar', Material: 'Cuero sintético y metal', Estilo: 'Elegante casual', Cuidado: 'Limpiar con paño' },
+colors: [{ hex: '#e8b4c8', name: 'Rosa' }, { hex: '#6b4c9a', name: 'Violeta' }, { hex: '#1e1a24', name: 'Negro' }],
+sizes: ['Único'],
+  pairsWith: [5, 1, 2]
+  }
+  ];
+  const FALLBACK_DATA = { CONFIG, heroImages, categories, promotions, catLabels, catTaglines, projects, products };
+  async function loadStoreData() {
+    try {
+      const res = await fetch('/api/data');
+      if (res.ok) {
+        const data = await res.json();
+        Object.assign(window, data);
+        return;
+      }
+    } catch (e) {}
+    Object.assign(window, FALLBACK_DATA);
+  }
+  const App = {
+view: 'home',
+activeFilter: 'all',
+cart: JSON.parse(localStorage.getItem('modafemenina_cart') || '[]'),
+product: null,
+currentProjectGallery: null,
+heroIndex: 0,
+heroTimer: null,
+previousView: 'home',
+selColor: null,
+selSize: null,
+_settingHash: false,
+_scrollSaveTimer: null,
+  init() {
+    this.loadCartFromCloud();
+    this.renderMenu();
+    this.renderHero();
+    this.renderHome();
+    this.renderShop();
+    this.renderAbout();
+    this.updateCart();
+const searchMobile = document.getElementById('search-input');
+const searchDesk = document.getElementById('search-input-desktop');
+const onSearchInput = (val) => {
+if (searchMobile) searchMobile.value = val;
+if (searchDesk) searchDesk.value = val;
+this.onSearch(val);
+};
+if (searchMobile) searchMobile.addEventListener('input', (e) => onSearchInput(e.target.value));
+if (searchDesk) searchDesk.addEventListener('input', (e) => onSearchInput(e.target.value));
+const devUrl = CONFIG.developer?.url || '#';
+['developer-link', 'footer-developer'].forEach(id => {
+const el = document.getElementById(id);
+if (el) el.href = devUrl;
+});
+const yearEl = document.getElementById('footer-year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+window.addEventListener('resize', () => this.onResize());
+this.onResize();
+this.setDesktopNav('home');
+window.addEventListener('hashchange', () => this.onHashChange());
+window.addEventListener('scroll', () => this.queueSaveScroll(), { passive: true });
+window.addEventListener('pagehide', () => this.saveScroll());
+const sharedId = new URLSearchParams(window.location.search).get('producto');
+const sharedCat = new URLSearchParams(window.location.search).get('categoria');
+if (location.hash) {
+this.applyRoute(this.parseHash(), true);
+} else if (sharedId && products.some(p => p.id === Number(sharedId))) {
+this.openProduct(sharedId);
+} else if (sharedCat && categories.some(c => c.id === sharedCat)) {
+this.go('shop', { cat: sharedCat });
+} else {
+history.replaceState(null, '', location.pathname + location.search + '#/');
+}
+},
+parseHash() {
+const raw = (location.hash || '').replace(/^#\/?/, '');
+const parts = raw.split('/').filter(Boolean);
+if (!parts.length) return { view: 'home' };
+if (parts[0] === 'tienda') return { view: 'shop', cat: parts[1] || null };
+if (parts[0] === 'nosotros') return { view: 'about' };
+if (parts[0] === 'producto' && parts[1]) return { view: 'product', id: parts[1] };
+return { view: 'home' };
+},
+applyRoute(route, isInitialLoad) {
+if (route.view === 'product') {
+if (products.some(p => p.id === Number(route.id))) {
+this.openProduct(route.id, { silent: true });
+} else {
+this.go('home', {}, { silent: true });
+}
+} else {
+this.go(route.view, { cat: route.cat }, { silent: true });
+}
+if (isInitialLoad) this.restoreScroll(route.view);
+},
+onHashChange() {
+if (this._settingHash) { this._settingHash = false; return; }
+this.applyRoute(this.parseHash());
+},
+updateHash(view, cat) {
+let hash;
+if (view === 'home') hash = '#/';
+else if (view === 'shop') hash = (cat && cat !== 'all') ? '#/tienda/' + cat : '#/tienda';
+else if (view === 'about') hash = '#/nosotros';
+else return;
+if (location.hash !== hash) {
+this._settingHash = true;
+location.hash = hash;
+}
+},
+queueSaveScroll() {
+clearTimeout(this._scrollSaveTimer);
+this._scrollSaveTimer = setTimeout(() => this.saveScroll(), 150);
+},
+saveScroll() {
+try {
+const key = document.body.classList.contains('product-open') ? 'product' : this.view;
+const y = document.body.classList.contains('product-open')
+? (document.getElementById('view-product')?.scrollTop || 0)
+: window.scrollY;
+sessionStorage.setItem('modafemenina_scroll_' + key, String(y));
+} catch (e) {}
+},
+restoreScroll(view) {
+try {
+const y = Number(sessionStorage.getItem('modafemenina_scroll_' + view) || 0);
+if (!y) return;
+requestAnimationFrame(() => {
+if (view === 'product') {
+const el = document.getElementById('view-product');
+if (el) el.scrollTop = y;
+} else {
+window.scrollTo(0, y);
+}
+});
+} catch (e) {}
+},
+isMobile() { return window.innerWidth < 769; },
+onResize() {
+document.body.classList.toggle('desktop', !this.isMobile());
+if (!this.isMobile() && document.body.classList.contains('product-open')) {
+document.getElementById('app-header').style.display = '';
+}
+},
+go(view, opts = {}, navOpts = {}) {
+this.closeOverlays();
+if (view !== 'product') {
+document.body.classList.remove('product-open');
+document.getElementById('app-header').style.display = '';
+}
+this.view = view;
+document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+const el = document.getElementById('view-' + view);
+if (el) el.classList.add('active');
+document.querySelectorAll('.tab').forEach(t => {
+t.classList.toggle('active', t.dataset.view === view && view !== 'menu');
+});
+if (view === 'shop') {
+if (opts.cat) this.filter(opts.cat);
+else this.renderShopGrid();
+}
+if (!navOpts.silent) {
+if (view === 'home') window.scrollTo({ top: 0, behavior: 'smooth' });
+if (view === 'about') window.scrollTo({ top: 0 });
+}
+this.setDesktopNav(view);
+if (!navOpts.silent) this.updateHash(view, opts.cat);
+},
+setDesktopNav(view) {
+document.querySelectorAll('.desktop-nav button').forEach(b => {
+b.classList.toggle('active', b.dataset.nav === view);
+});
+},
+openProduct(id, navOpts = {}) {
+const p = products.find(x => x.id === Number(id));
+if (!p) return;
+this.closeOverlays();
+this.previousView = document.body.classList.contains('product-open') ? this.previousView : this.view;
+this.product = p;
+this.selColor = null;
+this.selSize = null;
+document.body.classList.add('product-open');
+document.getElementById('app-header').style.display = this.isMobile() ? 'none' : '';
+document.getElementById('pd-main-img').src = p.images[0];
+document.getElementById('pd-thumbs').innerHTML = p.images.map((src, i) =>
+`<button type="button" class="pd-thumb${i === 0 ? ' active' : ''}" data-idx="${i}" onclick="App.setImage(this)"><img src="${src}" alt="" loading="lazy"></button>`
+).join('');
+document.getElementById('pd-cat-label').textContent = catLabels[p.cat];
+document.getElementById('pd-name').textContent = p.name;
+document.getElementById('pd-sku').textContent = p.sku + (p.brand ? ' · Marca: ' + p.brand : '');
+document.getElementById('pd-price').textContent = 'Bs. ' + p.price;
+document.getElementById('pd-price-sticky').textContent = 'Bs. ' + p.price;
+const priceBtn = document.getElementById('pd-price-btn');
+if (priceBtn) priceBtn.textContent = 'Bs. ' + p.price;
+document.getElementById('panel-desc').innerHTML = p.description;
+document.getElementById('panel-details').innerHTML = '<table class="detail-table">' +
+Object.entries(p.details).map(([k, v]) => `<tr><td>${k}</td><td>${v}</td></tr>`).join('') + '</table>';
+document.getElementById('pd-colors').innerHTML = p.colors.map((c, i) =>
+`<button type="button" class="color-btn" style="background:${c.hex}" title="${c.name}" data-idx="${i}" onclick="App.pickColor(${i})"></button>`
+).join('');
+document.getElementById('pd-sizes').innerHTML = p.sizes.map(s =>
+`<button type="button" class="size-btn" onclick="App.pickSize(this)">${s}</button>`
+).join('');
+this.renderCombine(p.pairsWith || []);
+this.switchTab('desc');
+if (!navOpts.silent) {
+document.getElementById('view-product').scrollTop = 0;
+window.scrollTo(0, 0);
+}
+document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+document.getElementById('view-product').classList.add('active');
+document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+if (!navOpts.silent) {
+this._settingHash = true;
+location.hash = '#/producto/' + p.id;
+}
+},
+closeProduct() {
+document.body.classList.remove('product-open');
+document.getElementById('app-header').style.display = '';
+this.go(this.previousView || 'shop');
+},
+setImage(btn) {
+const idx = Number(btn.dataset.idx);
+const img = btn.querySelector('img');
+if (!img) return;
+document.getElementById('pd-main-img').src = img.src;
+document.querySelectorAll('.pd-thumb').forEach((t, i) => t.classList.toggle('active', i === idx));
+},
+pickColor(idx) {
+this.selColor = this.product.colors[idx];
+document.querySelectorAll('.color-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+},
+pickSize(btn) {
+document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+btn.classList.add('active');
+this.selSize = btn.textContent;
+},
+switchTab(tab) {
+document.querySelectorAll('.pd-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+document.querySelectorAll('.pd-panel').forEach(p => p.classList.remove('active'));
+document.getElementById('panel-' + tab).classList.add('active');
+},
+renderCombine(ids) {
+const items = ids.map(id => products.find(p => p.id === id)).filter(Boolean);
+document.getElementById('pd-combine').innerHTML = items.length ? items.map(p =>
+`<button type="button" class="combine-card" onclick="App.openProduct(${p.id})">
+<img src="${p.img}" alt="${p.name}" loading="lazy">
+<span>${p.name}</span>
+<em>Bs. ${p.price}</em>
+</button>`
+).join('') : '<p style="color:var(--muted);font-size:0.85rem;">Próximamente más combinaciones.</p>';
+},
+addToCart() {
+if (!this.selColor || !this.selSize) {
+this.toast('Selecciona color y talle');
+return;
+}
+const p = this.product;
+this.cart.push({
+id: p.id,
+sku: p.sku,
+name: p.name,
+price: p.price,
+img: p.img,
+size: this.selSize,
+color: this.selColor.name,
+colorHex: this.selColor.hex
+});
+this.updateCart();
+localStorage.setItem('modafemenina_cart', JSON.stringify(this.cart));
+this.toast('Añadido al pedido');
+setTimeout(() => this.openCart(), 400);
+},
+openMenu() {
+document.getElementById('menu-sidebar').classList.add('open');
+document.getElementById('overlay').classList.add('show');
+document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === 'menu'));
+},
+closeMenu() {
+document.getElementById('menu-sidebar').classList.remove('open');
+if (!document.getElementById('cart-panel').classList.contains('open')) {
+document.getElementById('overlay').classList.remove('show');
+}
+},
+openCart() {
+this.closeMenu();
+document.getElementById('cart-panel').classList.add('open');
+document.getElementById('overlay').classList.add('show');
+document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.view === 'cart'));
+},
+closeCart() {
+document.getElementById('cart-panel').classList.remove('open');
+document.getElementById('overlay').classList.remove('show');
+},
+closeAll() {
+this.closeMenu();
+this.closeCart();
+},
+closeOverlays() {
+this.closeMenu();
+this.closeCart();
+const pfOverlay = document.getElementById('pf-modal-overlay');
+if (pfOverlay && pfOverlay.classList.contains('show')) this.closeProjectModal();
+const promoOverlay = document.getElementById('promo-modal-overlay');
+if (promoOverlay && promoOverlay.classList.contains('show')) this.closePromoModal();
+},
+  async loadCartFromCloud() {
+    try {
+      let sessionId = localStorage.getItem('modafemenina_session');
+      if (!sessionId) {
+        sessionId = crypto.randomUUID ? crypto.randomUUID() : 'sess-' + Math.random().toString(36).slice(2) + Date.now();
+        localStorage.setItem('modafemenina_session', sessionId);
+      }
+      const res = await fetch('/api/cart?session_id=' + encodeURIComponent(sessionId));
+      if (res.ok) {
+        const data = await res.json();
+        if (Array.isArray(data.cart)) {
+          this.cart = data.cart;
+        }
+      }
+    } catch (e) {}
+  },
+  async syncCartToCloud() {
+    try {
+      const sessionId = localStorage.getItem('modafemenina_session');
+      if (!sessionId) return;
+      await fetch('/api/cart', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ session_id: sessionId, cart: this.cart })
+      });
+    } catch (e) {}
+  },
+  updateCart() {
+const n = this.cart.length;
+document.getElementById('cart-badge').textContent = n;
+['cart-badge-desk', 'cart-badge-pd'].forEach(id => {
+const el = document.getElementById(id);
+if (el) el.textContent = n;
+});
+let total = 0;
+const box = document.getElementById('cart-items');
+if (!this.cart.length) {
+box.innerHTML = '<p style="text-align:center;color:var(--muted);padding:40px 0;">Tu pedido está vacío</p>';
+} else {
+box.innerHTML = this.cart.map((item, i) => {
+total += item.price;
+return `<div class="cart-item">
+<img src="${item.img}" alt="" loading="lazy" decoding="async">
+<div style="flex:1;">
+<p style="font-weight:600;font-size:0.85rem;">${item.name}</p>
+<p style="font-size:0.7rem;color:var(--dim);">SKU ${item.sku} · Talle ${item.size} · ${item.color}</p>
+<p style="font-weight:700;margin-top:4px;color:var(--accent-dark);">Bs. ${item.price}</p>
+</div>
+<button type="button" class="icon-btn" style="width:36px;height:36px;background:var(--surface);border-color:var(--border);color:var(--primary);" onclick="App.removeCart(${i})"><i class="fas fa-trash-alt"></i></button>
+</div>`;
+}).join('');
+}
+document.getElementById('cart-total').textContent = 'Bs. ' + total;
+localStorage.setItem('modafemenina_cart', JSON.stringify(this.cart));
+this.syncCartToCloud();
+},
+removeCart(i) {
+this.cart.splice(i, 1);
+localStorage.setItem('modafemenina_cart', JSON.stringify(this.cart));
+this.updateCart();
+},
+whatsapp() {
+const phone = CONFIG.phone;
+let msg;
+if (this.cart.length) {
+const lines = this.cart.map(p => `• ${p.name} (SKU: ${p.sku}) — Talle ${p.size}, ${p.color}`).join('\n');
+msg = ` *PEDIDO MODA FEMENINA*\n${lines}\n*Total estimado: ${document.getElementById('cart-total').textContent}*`;
+} else {
+msg = 'Hola MODA FEMENINA, me gustaría más información sobre sus prendas.';
+}
+window.open('https://wa.me/' + phone + '?text=' + encodeURIComponent(msg), '_blank');
+},
+whatsappHelp() {
+const msg = 'Hola MODA FEMENINA, quiero consultar disponibilidad y talles de sus prendas.';
+window.open('https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg), '_blank');
+},
+toast(msg) {
+const t = document.getElementById('toast');
+t.textContent = msg;
+t.classList.add('show');
+setTimeout(() => t.classList.remove('show'), 2500);
+},
+onSearch(q) {
+q = q.trim().toLowerCase();
+if (!q) {
+if (this.view === 'shop') this.renderShopGrid();
+if (this.view === 'home') this.renderGrid('home-featured', products.slice(0, 4));
+return;
+}
+this.go('shop');
+const found = products.filter(p =>
+p.name.toLowerCase().includes(q) ||
+p.sku.toLowerCase().includes(q) ||
+p.cat.includes(q)
+);
+this.renderGrid('shop-grid', found);
+document.getElementById('shop-count').textContent = '(' + found.length + ' resultados)';
+},
+filter(cat) {
+this.activeFilter = cat;
+document.querySelectorAll('#shop-filters .filter-chip').forEach(b =>
+b.classList.toggle('active', b.dataset.cat === cat)
+);
+const data = cat === 'all' ? products : products.filter(p => p.cat === cat);
+this.renderGrid('shop-grid', data);
+document.getElementById('shop-count').textContent = '(' + data.length + ' productos)';
+},
+renderGrid(id, data) {
+const g = document.getElementById(id);
+g.innerHTML = data.length ? data.map(p => this.productCard(p)).join('') :
+'<p class="empty">No hay productos.</p>';
+},
+productCard(p) {
+const brandTag = p.brand ? `<span class="brand-tag">${p.brand}</span>` : '';
+return `<div class="card">
+<button type="button" class="card-img-btn" onclick="App.openProduct(${p.id})" aria-label="Ver ${p.name}">
+<div class="card-img"><img src="${p.img}" alt="${p.name}" loading="lazy">${brandTag}</div>
+</button>
+<button type="button" class="card-info" onclick="App.openProduct(${p.id})">
+<p class="sku">${p.sku}${p.brand ? ' · ' + p.brand : ''}</p>
+<h4>${p.name}</h4>
+<div class="row"><span class="price">Bs. ${p.price}</span><span style="font-size:0.65rem;color:var(--muted);">${catLabels[p.cat]}</span></div>
+</button>
+<div class="card-actions">
+<button type="button" class="card-btn" onclick="App.openProduct(${p.id})"><i class="fas fa-eye"></i> Ver detalles</button>
+<div class="card-actions-row">
+<button type="button" class="card-btn-wa" onclick="event.stopPropagation(); App.quickWhatsapp(${p.id})"><i class="fab fa-whatsapp"></i> Consultar</button>
+<button type="button" class="card-icon-btn" onclick="event.stopPropagation(); App.shareProduct(${p.id})" aria-label="Compartir producto"><i class="fas fa-share-alt"></i></button>
+</div>
+</div>
+</div>`;
+},
+quickWhatsapp(id) {
+const p = products.find(x => x.id === Number(id));
+if (!p) return;
+const msg = `Hola MODA FEMENINA, me interesa este producto:\n*${p.name}* (SKU: ${p.sku})\nBs. ${p.price}\n¿Podrían darme más información?`;
+window.open('https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg), '_blank');
+},
+productUrl(id) {
+const url = new URL(window.location.href);
+url.hash = '';
+url.searchParams.set('producto', id);
+return url.toString();
+},
+async shareProduct(id) {
+const p = products.find(x => x.id === Number(id));
+if (!p) return;
+const url = this.productUrl(id);
+const shareData = { title: p.name + ' · MODA FEMENINA', text: `Mira este producto de MODA FEMENINA: ${p.name} — Bs. ${p.price}`, url };
+if (navigator.share) {
+try { await navigator.share(shareData); } catch (e) {}
+return;
+}
+try {
+await navigator.clipboard.writeText(url);
+this.toast('Enlace copiado');
+} catch (e) {
+window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text + ' ' + url), '_blank');
+}
+},
+categoryUrl(cat) {
+const url = new URL(window.location.href);
+url.hash = '';
+url.searchParams.delete('producto');
+url.searchParams.set('categoria', cat);
+return url.toString();
+},
+async shareCategory(cat) {
+const url = this.categoryUrl(cat);
+const label = catLabels[cat] || cat;
+const shareData = { title: label + ' · MODA FEMENINA', text: `Mira los productos de ${label} en MODA FEMENINA:`, url };
+if (navigator.share) {
+try { await navigator.share(shareData); } catch (e) {}
+return;
+}
+try {
+await navigator.clipboard.writeText(url);
+this.toast('Enlace de categoría copiado');
+} catch (e) {
+window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text + ' ' + url), '_blank');
+}
+},
+pageUrl() {
+const url = new URL(window.location.href);
+url.hash = '';
+url.searchParams.delete('producto');
+url.searchParams.delete('categoria');
+return url.toString();
+},
+async sharePage() {
+const url = this.pageUrl();
+const shareData = { title: 'MODA FEMENINA', text: 'Mira el catálogo de MODA FEMENINA: camisas, sacos, bléizer, pantalones de vestir y más.', url };
+if (navigator.share) {
+try { await navigator.share(shareData); } catch (e) {}
+return;
+}
+try {
+await navigator.clipboard.writeText(url);
+this.toast('Enlace copiado');
+} catch (e) {
+window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text + ' ' + url), '_blank');
+}
+},
+renderMenu() {
+const promos = promotions.map((pr, idx) =>
+`<div class="menu-promo" onclick="App.closeMenu(); App.openPromoModal(${idx});">
+<strong>${pr.badge} — ${pr.title}</strong><span>${pr.sub}</span>
+</div>`
+).join('');
+const cats = categories.map(c =>
+`<button type="button" class="menu-link" onclick="App.filter('${c.id}'); App.go('shop'); App.closeMenu();">
+<i class="fas fa-tshirt"></i> ${c.name}
+</button>`
+).join('');
+document.getElementById('menu-content').innerHTML = `
+<p class="menu-label">Promociones</p>${promos}
+<p class="menu-label">Categorías</p>${cats}
+<p class="menu-label">Catálogo</p>
+<button type="button" class="menu-link" onclick="App.go('shop'); App.closeMenu();"><i class="fas fa-store"></i> Ver catálogo</button>
+<button type="button" class="menu-link" onclick="App.go('about'); App.closeMenu();"><i class="fas fa-info-circle"></i> Sobre MODA FEMENINA</button>
+<button type="button" class="menu-link" onclick="App.whatsapp(); App.closeMenu();"><i class="fab fa-whatsapp"></i> WhatsApp: 75179990</button>
+<button type="button" class="menu-link" onclick="App.sharePage(); App.closeMenu();"><i class="fas fa-share-alt"></i> Compartir tienda</button>
+`;
+},
+renderHero() {
+const track = document.getElementById('hero-carousel');
+if (!track) return;
+const heroCopy = [
+  {eyebrow:'MODA FEMENINA', title:'Elegancia que <span>te define</span>', text:'Camisas, sacos, bléizer y pantalones de vestir para la mujer que valora el estilo y la calidad.', cta:'Ver catálogo'},
+  {eyebrow:'NUEVA COLECCIÓN', title:'Estilo que <span>te acompaña</span>', text:'Prendas pensadas para cada ocasión, del trabajo al fin de semana.', cta:'Explorar colección'},
+  {eyebrow:'ASESORÍA PERSONALIZADA', title:'Tu look, <span>tu momento</span>', text:'Te ayudamos a encontrar la pieza perfecta para vos.', cta:'Contactanos'}
+];
+track.innerHTML = heroImages.map((src, i) => {
+  const c = heroCopy[i] || heroCopy[0];
+  const action = i === 2 ? "App.whatsappHelp()" : "App.go('shop')";
+  return `<div class="hero-slide${i === 0 ? ' active' : ''}" style="background-image:url('${src}')"><img src="${src}" alt="MODA FEMENINA" loading="${i === 0 ? 'eager' : 'lazy'}"><div class="hero-content"><span class="eyebrow">${c.eyebrow}</span><h1>${c.title}</h1><p>${c.text}</p><button type="button" class="hero-cta" onclick="event.stopPropagation();${action}">${c.cta} <i class="fas fa-arrow-right"></i></button></div></div>`;
+}).join('') +
+`<div class="hero-dots">${heroImages.map((_, i) =>
+`<button type="button" class="hero-dot${i === 0 ? ' active' : ''}" data-idx="${i}" onclick="App.goToHeroSlide(${i})" aria-label="Ver imagen ${i + 1}"></button>`
+).join('')}</div>`;
+this.heroIndex = 0;
+this.startHeroAutoplay();
+},
+startHeroAutoplay() {
+if (this.heroTimer) clearInterval(this.heroTimer);
+this.heroTimer = setInterval(() => {
+this.goToHeroSlide((this.heroIndex + 1) % heroImages.length, true);
+}, 4000);
+},
+goToHeroSlide(idx, fromAutoplay) {
+this.heroIndex = idx;
+document.querySelectorAll('#hero-carousel .hero-slide').forEach((el, i) => el.classList.toggle('active', i === idx));
+document.querySelectorAll('#hero-carousel .hero-dot').forEach((el, i) => el.classList.toggle('active', i === idx));
+if (!fromAutoplay) this.startHeroAutoplay();
+},
+renderHome() {
+document.getElementById('home-promos').innerHTML = promotions.map((pr, idx) =>
+`<article class="promo-card" onclick="App.openPromoModal(${idx});">
+<button type="button" class="card-float-share" onclick="event.stopPropagation(); App.sharePromo(${idx})" aria-label="Compartir promoción"><i class="fas fa-share-alt"></i></button>
+<img src="${pr.image}" alt="" loading="lazy" decoding="async"><div class="promo-body"><span class="badge">${pr.badge}</span><strong>${pr.title}</strong><p>${pr.sub}</p></div>
+</article>`
+).join('');
+document.getElementById('home-cats').innerHTML = categories.map(c =>
+`<article class="cat-card" onclick="App.filter('${c.id}'); App.go('shop');">
+<img src="${c.image}" alt="${c.name}" loading="lazy" decoding="async"><span>${c.name}</span>
+</article>`
+).join('');
+this.renderGrid('home-featured', products.slice(0, 4));
+},
+renderShop() {
+const cats = ['all', ...categories.map(c => c.id)];
+document.getElementById('shop-filters').innerHTML = cats.map(c => {
+const count = c === 'all' ? products.length : products.filter(p => p.cat === c).length;
+const label = c === 'all' ? 'Todos' : catLabels[c];
+const shareBtn = c === 'all' ? '' : `<button type="button" class="filter-chip-share" onclick="event.stopPropagation(); App.shareCategory('${c}')" aria-label="Compartir categoría ${label}"><i class="fas fa-share-alt"></i></button>`;
+return `<div class="filter-chip${c === 'all' ? ' active' : ''}" data-cat="${c}">
+<button type="button" class="filter-chip-btn" onclick="App.filter('${c}')">${label}</button>
+<span class="filter-chip-count">${count}</span>
+${shareBtn}
+</div>`;
+}).join('');
+this.renderShopGrid();
+},
+renderShopGrid() {
+this.filter(this.activeFilter);
+},
+renderAbout() {
+const s = CONFIG.store;
+document.getElementById('about-content').innerHTML = `
+<div class="about-block"><h3>Nuestra historia</h3><p>${s.story}</p></div>
+<div class="about-block"><h3>Misión</h3><p>${s.mission}</p></div>
+<div class="about-block portfolio-section">
+<h3>Nuestros Looks</h3>
+<p class="portfolio-intro">Algunas de las piezas destacadas de nuestra colección actual. Tocá cualquiera para ver más detalles.</p>
+<div class="filters portfolio-filters" id="portfolio-filters"></div>
+<div class="portfolio-grid" id="portfolio-grid"></div>
+</div>
+<div class="about-block"><h3>¿Por qué elegir MODA FEMENINA?</h3>
+<div style="display:grid;gap:10px;margin-top:12px;">
+<div class="info-card"><i class="fas fa-gem"></i><div><strong>Calidad premium</strong><span>Telas seleccionadas y acabados de primera.</span></div></div>
+<div class="info-card"><i class="fas fa-heart"></i><div><strong>Diseños con estilo</strong><span>Prendas actuales pensadas para la mujer moderna.</span></div></div>
+<div class="info-card"><i class="fas fa-truck"></i><div><strong>Entrega rápida</strong><span>Envío a domicilio y a todo el país.</span></div></div>
+<div class="info-card"><i class="fas fa-user-tie"></i><div><strong>Asesoría personalizada</strong><span>Te ayudamos a encontrar tu look ideal.</span></div></div>
+</div>
+</div>
+<div class="about-info">
+<div class="info-card"><i class="fas fa-clock"></i><div><strong>Horario</strong><span>${s.hours}</span></div></div>
+<div class="info-card"><i class="fas fa-map-marker-alt"></i><div><strong>Ubicación</strong><span>${s.address}</span></div></div>
+<div class="info-card"><i class="fas fa-phone"></i><div><strong>Teléfonos</strong><span>75179990</span></div></div>
+<div class="info-card"><i class="fab fa-instagram"></i><div><strong>Instagram</strong><span>${s.instagram}</span></div></div>
+</div>
+`;
+this.renderPortfolioFilters();
+this.renderPortfolioGrid('all');
+},
+renderPortfolioFilters() {
+const cats = ['all', ...new Set(projects.map(p => p.cat))];
+document.getElementById('portfolio-filters').innerHTML = cats.map(c =>
+`<button type="button" class="filter-chip${c === 'all' ? ' active' : ''}" data-pfcat="${c}" onclick="App.filterPortfolio('${c}')">${c === 'all' ? 'Todos' : catLabels[c]}</button>`
+).join('');
+},
+filterPortfolio(cat) {
+document.querySelectorAll('#portfolio-filters .filter-chip').forEach(b =>
+b.classList.toggle('active', b.dataset.pfcat === cat)
+);
+this.renderPortfolioGrid(cat);
+},
+renderPortfolioGrid(cat) {
+const data = cat === 'all' ? projects : projects.filter(p => p.cat === cat);
+document.getElementById('portfolio-grid').innerHTML = data.map(p => `
+<div class="portfolio-card-wrap">
+<button type="button" class="portfolio-card" onclick="App.openProjectModal(${p.id})">
+<img src="${p.image}" alt="${p.title}" loading="lazy">
+<div class="portfolio-overlay">
+<span class="badge">${catLabels[p.cat]}</span>
+<strong>${p.title}</strong>
+<span><i class="fas fa-map-marker-alt"></i>${p.location}</span>
+</div>
+</button>
+<button type="button" class="card-float-share" onclick="App.shareProjectCard(${p.id})" aria-label="Compartir"><i class="fas fa-share-alt"></i></button>
+</div>
+`).join('');
+},
+async shareProject(id) {
+const p = projects.find(x => x.id === Number(id));
+if (!p) return;
+const shareData = { title: p.title + ' · MODA FEMENINA', text: `Mira este look de MODA FEMENINA: ${p.title}`, url: window.location.href };
+if (navigator.share) {
+try { await navigator.share(shareData); } catch (e) {}
+return;
+}
+try {
+await navigator.clipboard.writeText(shareData.url);
+this.toast('Enlace copiado');
+} catch (e) {
+window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text + ' ' + shareData.url), '_blank');
+}
+},
+shareProjectCard(id) { this.shareProject(id); },
+openProjectModal(id) {
+const p = projects.find(x => x.id === Number(id));
+if (!p) return;
+const gallery = (p.images && p.images.length) ? p.images : [p.image];
+this.currentProjectGallery = gallery;
+document.getElementById('pf-modal-img').src = gallery[0];
+document.getElementById('pf-modal-img').alt = p.title;
+const thumbsEl = document.getElementById('pf-modal-thumbs');
+thumbsEl.innerHTML = gallery.length > 1 ? gallery.map((src, i) =>
+`<button type="button" class="pf-modal-thumb${i === 0 ? ' active' : ''}" data-idx="${i}" onclick="App.setProjectImage(this)"><img src="${src}" alt="" loading="lazy"></button>`
+).join('') : '';
+document.getElementById('pf-modal-cat').textContent = catLabels[p.cat] + ' · ' + p.location;
+document.getElementById('pf-modal-title').textContent = p.title;
+document.getElementById('pf-modal-desc').textContent = p.description;
+document.getElementById('pf-modal-details').innerHTML = '<table class="detail-table">' +
+`<tr><td>Disponibilidad</td><td>${p.client || 'Consultar'}</td></tr>` +
+`<tr><td>Ubicación</td><td>${p.location}</td></tr>` +
+`<tr><td>Entrega</td><td>${p.duration || 'A consultar'}</td></tr>` +
+`<tr><td>Categoría</td><td>${catLabels[p.cat]}</td></tr>` +
+'</table>';
+document.getElementById('pf-modal-cta').onclick = () => {
+const msg = `Hola MODA FEMENINA, vi "${p.title}" en su web y me gustaría más información.`;
+window.open('https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg), '_blank');
+};
+document.getElementById('pf-modal-share').onclick = () => this.shareProject(p.id);
+document.getElementById('pf-modal-overlay').classList.add('show');
+document.getElementById('pf-modal').classList.add('show');
+document.body.style.overflow = 'hidden';
+},
+setProjectImage(btn) {
+const idx = Number(btn.dataset.idx);
+document.getElementById('pf-modal-img').src = this.currentProjectGallery[idx];
+document.querySelectorAll('#pf-modal-thumbs .pf-modal-thumb').forEach(t => t.classList.remove('active'));
+btn.classList.add('active');
+},
+closeProjectModal() {
+document.getElementById('pf-modal-overlay').classList.remove('show');
+document.getElementById('pf-modal').classList.remove('show');
+document.body.style.overflow = '';
+},
+async sharePromo(idx) {
+const pr = promotions[Number(idx)];
+if (!pr) return;
+const url = this.categoryUrl(pr.cat);
+const shareData = { title: pr.title + ' · MODA FEMENINA', text: `Promoción de MODA FEMENINA: ${pr.title} — ${pr.sub}`, url };
+if (navigator.share) {
+try { await navigator.share(shareData); } catch (e) {}
+return;
+}
+try {
+await navigator.clipboard.writeText(url);
+this.toast('Enlace copiado');
+} catch (e) {
+window.open('https://wa.me/?text=' + encodeURIComponent(shareData.text + ' ' + url), '_blank');
+}
+},
+openPromoModal(idx) {
+const pr = promotions[Number(idx)];
+if (!pr) return;
+document.getElementById('promo-modal-img').src = pr.image;
+document.getElementById('promo-modal-img').alt = pr.title;
+document.getElementById('promo-modal-cat').textContent = pr.badge + ' · ' + catLabels[pr.cat];
+document.getElementById('promo-modal-title').textContent = pr.title;
+document.getElementById('promo-modal-desc').textContent = pr.fullDescription || pr.sub;
+document.getElementById('promo-modal-details').innerHTML = '<table class="detail-table">' +
+`<tr><td>Categoría</td><td>${catLabels[pr.cat]}</td></tr>` +
+`<tr><td>Vigencia</td><td>${pr.validUntil || 'Consultar disponibilidad'}</td></tr>` +
+(pr.conditions && pr.conditions.length ? `<tr><td>Condiciones</td><td>${pr.conditions.join(' · ')}</td></tr>` : '') +
+'</table>';
+document.getElementById('promo-modal-cta').onclick = () => {
+this.closePromoModal();
+this.go('shop', { cat: pr.cat });
+};
+document.getElementById('promo-modal-wa').onclick = () => {
+const msg = `Hola MODA FEMENINA, vi la promoción "${pr.title}" y me gustaría más información.`;
+window.open('https://wa.me/' + CONFIG.phone + '?text=' + encodeURIComponent(msg), '_blank');
+};
+document.getElementById('promo-modal-share').onclick = () => this.sharePromo(idx);
+document.getElementById('promo-modal-overlay').classList.add('show');
+document.getElementById('promo-modal').classList.add('show');
+document.body.style.overflow = 'hidden';
+},
+closePromoModal() {
+document.getElementById('promo-modal-overlay').classList.remove('show');
+document.getElementById('promo-modal').classList.remove('show');
+document.body.style.overflow = '';
+}
+};
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadStoreData();
+  App.init();
+});
+</script>
+</body>
+</html>

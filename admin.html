@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin · MODA FEMENINA</title>
+<style>
+  :root {
+    --primary: #6b4c9a;
+    --primary-dark: #4d346f;
+    --accent: #e8b4c8;
+    --bg: #fdfbfc;
+    --surface: #f5eef2;
+    --text: #1e1a24;
+    --dim: #5d5566;
+    --muted: #9a8fa3;
+    --border: #eadfe6;
+    --wa: #25D366;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  .login-wrap {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .login-box {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    width: 100%;
+    max-width: 360px;
+    box-shadow: 0 10px 30px rgba(107,76,154,.12);
+  }
+  .login-box h1 {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    color: var(--primary);
+  }
+  .login-box p {
+    font-size: 0.85rem;
+    color: var(--dim);
+    margin-bottom: 20px;
+  }
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 6px;
+    font-family: 'Oswald', sans-serif;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: #fff;
+    color: var(--text);
+    outline: none;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus {
+    border-color: var(--primary);
+  }
+  .btn {
+    border: 0;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    font-size: 0.78rem;
+  }
+  .btn-primary {
+    background: var(--primary);
+    color: #fff;
+    width: 100%;
+  }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-accent {
+    background: var(--accent);
+    color: var(--primary-dark);
+  }
+  .btn-danger {
+    background: #dc2626;
+    color: #fff;
+  }
+  .app { display: none; }
+  .app.show { display: block; }
+  .topbar {
+    position: sticky;
+    top: 0;
+    background: var(--primary);
+    color: #fff;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    z-index: 100;
+    border-bottom: 1px solid rgba(232,180,200,.3);
+  }
+  .topbar h1 {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+  }
+  .tabs {
+    display: flex;
+    gap: 8px;
+    padding: 12px 16px;
+    overflow-x: auto;
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab {
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    padding: 8px 14px;
+    border-radius: 100px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .tab.active {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+  }
+  .section { display: none; padding: 16px; max-width: 1200px; margin: 0 auto; }
+  .section.active { display: block; }
+  .card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .card h3 {
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+  .actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 40px 20px;
+    font-style: italic;
+  }
+  .toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 100px;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .toast.show { opacity: 1; }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .stat {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat strong {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.6rem;
+    color: var(--primary);
+    letter-spacing: 1px;
+  }
+  .stat span {
+    font-size: 0.75rem;
+    color: var(--dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="login-wrap" id="login-wrap">
+  <div class="login-box">
+    <h1>Admin · MODA FEMENINA</h1>
+    <p>Ingresá la contraseña para administrar la tienda.</p>
+    <div class="field">
+      <label>Contraseña</label>
+      <input type="password" id="admin-password" autocomplete="current-password">
+    </div>
+    <button type="button" class="btn btn-primary" id="btn-login">Ingresar</button>
+    <p id="login-error" style="color:#dc2626;font-size:0.85rem;margin-top:10px;display:none;"></p>
+  </div>
+</div>
+
+<div class="app" id="app">
+  <div class="topbar">
+    <h1>Admin · MODA FEMENINA</h1>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button type="button" class="btn btn-accent" id="btn-view-site">Ver tienda</button>
+      <button type="button" class="btn btn-danger" id="btn-logout">Salir</button>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <button type="button" class="tab active" data-tab="dashboard">Dashboard</button>
+    <button type="button" class="tab" data-tab="products">Productos</button>
+    <button type="button" class="tab" data-tab="categories">Categorías</button>
+    <button type="button" class="tab" data-tab="promotions">Promociones</button>
+    <button type="button" class="tab" data-tab="projects">Looks</button>
+    <button type="button" class="tab" data-tab="config">Config</button>
+  </div>
+
+  <section class="section active" id="section-dashboard">
+    <div class="stats">
+      <div class="stat"><strong id="stat-products">0</strong><span>Productos</span></div>
+      <div class="stat"><strong id="stat-categories">0</strong><span>Categorías</span></div>
+      <div class="stat"><strong id="stat-promotions">0</strong><span>Promociones</span></div>
+      <div class="stat"><strong id="stat-projects">0</strong><span>Looks</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="section-products">
+    <div class="card">
+      <h3>Nuevo producto</h3>
+      <div class="field"><label>Nombre</label><input type="text" id="p-name"></div>
+      <div class="field"><label>SKU</label><input type="text" id="p-sku"></div>
+      <div class="field"><label>Precio (Bs.)</label><input type="number" id="p-price" step="0.01"></div>
+      <div class="field"><label>Categoría</label><select id="p-cat"></select></div>
+      <div class="field"><label>Imagen</label><input type="file" id="p-file" accept="image/*"><input type="text" id="p-img" placeholder="URL de la imagen"><img id="p-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
+      <div class="field"><label>Descripción corta</label><input type="text" id="p-desc"></div>
+      <div class="field"><label>Descripción HTML</label><textarea id="p-description" rows="4"></textarea></div>
+      <div class="field"><label>Detalles (JSON)</label><textarea id="p-details" rows="3" placeholder='{"Material":"..."}'></textarea></div>
+      <div class="field"><label>Colores (JSON)</label><textarea id="p-colors" rows="3" placeholder='[{"hex":"#fff","name":"Blanco"}]'></textarea></div>
+      <div class="field"><label>Talles (JSON)</label><textarea id="p-sizes" rows="2" placeholder='["S","M","L"]'></textarea></div>
+      <div class="field"><label>Combinar con IDs (JSON)</label><textarea id="p-pairs" rows="2" placeholder='[1,2]'></textarea></div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="btn-save-product">Guardar producto</button>
+        <button type="button" class="btn btn-accent" id="btn-cancel-edit-product" style="display:none;">Cancelar edición</button>
+      </div>
+      <input type="hidden" id="p-edit-id">
+    </div>
+    <div class="card"><h3>Productos</h3><div id="products-list"></div></div>
+  </section>
+
+  <section class="section" id="section-categories">
+    <div class="card">
+      <h3>Nueva categoría</h3>
+      <div class="field"><label>ID</label><input type="text" id="c-id"></div>
+      <div class="field"><label>Nombre</label><input type="text" id="c-name"></div>
+      <div class="field"><label>Imagen</label><input type="file" id="c-file" accept="image/*"><input type="text" id="c-image" placeholder="URL de la imagen"><img id="c-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
+      <div class="field"><label>Orden</label><input type="number" id="c-sort" value="0"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="btn-save-category">Guardar categoría</button>
+        <button type="button" class="btn btn-accent" id="btn-cancel-edit-category" style="display:none;">Cancelar edición</button>
+      </div>
+      <input type="hidden" id="c-edit-id">
+    </div>
+    <div class="card"><h3>Categorías</h3><div id="categories-list"></div></div>
+  </section>
+
+  <section class="section" id="section-promotions">
+    <div class="card">
+      <h3>Nueva promoción</h3>
+      <div class="field"><label>Badge</label><input type="text" id="pr-badge"></div>
+      <div class="field"><label>Título</label><input type="text" id="pr-title"></div>
+      <div class="field"><label>Subtítulo</label><input type="text" id="pr-sub"></div>
+      <div class="field"><label>Categoría</label><select id="pr-cat"></select></div>
+      <div class="field"><label>Imagen</label><input type="file" id="pr-file" accept="image/*"><input type="text" id="pr-image" placeholder="URL de la imagen"><img id="pr-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
+      <div class="field"><label>Descripción completa</label><textarea id="pr-desc" rows="4"></textarea></div>
+      <div class="field"><label>Vigencia</label><input type="text" id="pr-valid"></div>
+      <div class="field"><label>Condiciones (JSON)</label><textarea id="pr-conditions" rows="3" placeholder='["Cond 1","Cond 2"]'></textarea></div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="btn-save-promotion">Guardar promoción</button>
+        <button type="button" class="btn btn-accent" id="btn-cancel-edit-promotion" style="display:none;">Cancelar edición</button>
+      </div>
+      <input type="hidden" id="pr-edit-id">
+    </div>
+    <div class="card"><h3>Promociones</h3><div id="promotions-list"></div></div>
+  </section>
+
+  <section class="section" id="section-projects">
+    <div class="card">
+      <h3>Nuevo look</h3>
+      <div class="field"><label>Título</label><input type="text" id="pj-title"></div>
+      <div class="field"><label>Categoría</label><select id="pj-cat"></select></div>
+      <div class="field"><label>Ubicación</label><input type="text" id="pj-location"></div>
+      <div class="field"><label>Cliente</label><input type="text" id="pj-client"></div>
+      <div class="field"><label>Duración</label><input type="text" id="pj-duration"></div>
+      <div class="field"><label>Imagen</label><input type="file" id="pj-file" accept="image/*"><input type="text" id="pj-image" placeholder="URL de la imagen"><img id="pj-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
+      <div class="field"><label>Descripción</label><textarea id="pj-description" rows="4"></textarea></div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="btn-save-project">Guardar look</button>
+        <button type="button" class="btn btn-accent" id="btn-cancel-edit-project" style="display:none;">Cancelar edición</button>
+      </div>
+      <input type="hidden" id="pj-edit-id">
+    </div>
+    <div class="card"><h3>Looks</h3><div id="projects-list"></div></div>
+  </section>
+
+  <section class="section" id="section-config">
+    <div class="card">
+      <h3>Configuración de la tienda</h3>
+      <div class="field"><label>Nombre</label><input type="text" id="cf-name"></div>
+      <div class="field"><label>Eslogan</label><input type="text" id="cf-tagline"></div>
+      <div class="field"><label>Historia</label><textarea id="cf-story" rows="4"></textarea></div>
+      <div class="field"><label>Misión</label><textarea id="cf-mission" rows="3"></textarea></div>
+      <div class="field"><label>Horario</label><input type="text" id="cf-hours"></div>
+      <div class="field"><label>Dirección</label><input type="text" id="cf-address"></div>
+      <div class="field"><label>Email</label><input type="text" id="cf-email"></div>
+      <div class="field"><label>Instagram</label><input type="text" id="cf-instagram"></div>
+      <div class="actions">
+        <button type="button" class="btn btn-primary" id="btn-save-config">Guardar configuración</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const API_BASE = '';
+  let currentTab = 'dashboard';
+
+  function tryParseJson(str, fallback) {
+    try { return JSON.parse(str); } catch { return fallback; }
+  }
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  async function api(path, options = {}) {
+    const res = await fetch(API_BASE + path, {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options.headers || {})
+      }
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Error en la solicitud');
+    }
+    return res.json();
+  }
+
+  async function login() {
+    const password = document.getElementById('admin-password').value;
+    const errorEl = document.getElementById('login-error');
+    try {
+      const data = await api('/api/admin/login', {
+        method: 'POST',
+        body: JSON.stringify({ password })
+      });
+      localStorage.setItem('modafemenina_admin_token', data.token);
+      errorEl.style.display = 'none';
+      document.getElementById('login-wrap').style.display = 'none';
+      document.getElementById('app').classList.add('show');
+      document.getElementById('app').style.display = 'block';
+      loadAll();
+    } catch (e) {
+      errorEl.textContent = e.message;
+      errorEl.style.display = 'block';
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem('modafemenina_admin_token');
+    document.getElementById('app').classList.remove('show');
+    document.getElementById('app').style.display = 'none';
+    document.getElementById('login-wrap').style.display = 'flex';
+    document.getElementById('admin-password').value = '';
+  }
+
+  async function loadAll() {
+    await loadDashboard();
+    await loadProducts();
+    await loadCategories();
+    await loadPromotions();
+    await loadProjects();
+    await loadConfig();
+  }
+
+  async function loadDashboard() {
+    try {
+      const [products, categories, promotions, projects] = await Promise.all([
+        api('/api/admin/products'),
+        api('/api/admin/categories'),
+        api('/api/admin/promotions'),
+        api('/api/admin/projects')
+      ]);
+      document.getElementById('stat-products').textContent = products.products?.length || 0;
+      document.getElementById('stat-categories').textContent = categories.categories?.length || 0;
+      document.getElementById('stat-promotions').textContent = promotions.promotions?.length || 0;
+      document.getElementById('stat-projects').textContent = projects.projects?.length || 0;
+    } catch (e) {
+      console.error('Error loading dashboard', e);
+    }
+  }
+
+  async function loadProducts() {
+    const data = await api('/api/admin/products');
+    const list = document.getElementById('products-list');
+    const products = data.products || [];
+    if (!products.length) {
+      list.innerHTML = '<div class="empty">No hay productos.</div>';
+      return;
+    }
+    list.innerHTML = '<div class="grid">' + products.map(p => `
+      <div class="card" style="margin-bottom:0">
+        <h3>${escapeHtml(p.name)}</h3>
+        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(p.sku)} · ${escapeHtml(p.cat)}</p>
+        <p style="font-size:0.9rem;font-weight:700;color:var(--accent-dark)">Bs. ${p.price}</p>
+        <div class="actions">
+          <button type="button" class="btn btn-accent" data-action="edit" data-id="${p.id}">Editar</button>
+          <button type="button" class="btn btn-danger" data-action="delete" data-id="${p.id}">Eliminar</button>
+        </div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  async function loadCategories() {
+    const data = await api('/api/admin/categories');
+    const list = document.getElementById('categories-list');
+    const categories = data.categories || [];
+    if (!categories.length) {
+      list.innerHTML = '<div class="empty">No hay categorías.</div>';
+      return;
+    }
+    list.innerHTML = '<div class="grid">' + categories.map(c => `
+      <div class="card" style="margin-bottom:0">
+        <h3>${escapeHtml(c.name)}</h3>
+        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(c.id)} · sort: ${c.sort}</p>
+        <img src="${escapeHtml(c.image)}" style="width:100%;height:140px;object-fit:cover;border-radius:6px;margin-top:8px;" alt="${escapeHtml(c.name)}">
+        <div class="actions">
+          <button type="button" class="btn btn-accent" data-action="edit" data-id="${escapeHtml(c.id)}">Editar</button>
+          <button type="button" class="btn btn-danger" data-action="delete" data-id="${escapeHtml(c.id)}">Eliminar</button>
+        </div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  async function loadPromotions() {
+    const data = await api('/api/admin/promotions');
+    const list = document.getElementById('promotions-list');
+    const promotions = data.promotions || [];
+    if (!promotions.length) {
+      list.innerHTML = '<div class="empty">No hay promociones.</div>';
+      return;
+    }
+    list.innerHTML = '<div class="grid">' + promotions.map(p => `
+      <div class="card" style="margin-bottom:0">
+        <h3>${escapeHtml(p.title)}</h3>
+        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(p.badge)} · ${escapeHtml(p.cat)}</p>
+        <div class="actions">
+          <button type="button" class="btn btn-accent" data-action="edit" data-id="${p.id}">Editar</button>
+          <button type="button" class="btn btn-danger" data-action="delete" data-id="${p.id}">Eliminar</button>
+        </div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  async function loadProjects() {
+    const data = await api('/api/admin/projects');
+    const list = document.getElementById('projects-list');
+    const projects = data.projects || [];
+    if (!projects.length) {
+      list.innerHTML = '<div class="empty">No hay looks.</div>';
+      return;
+    }
+    list.innerHTML = '<div class="grid">' + projects.map(p => `
+      <div class="card" style="margin-bottom:0">
+        <h3>${escapeHtml(p.title)}</h3>
+        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(p.cat)} · ${escapeHtml(p.location)}</p>
+        <div class="actions">
+          <button type="button" class="btn btn-accent" data-action="edit" data-id="${p.id}">Editar</button>
+          <button type="button" class="btn btn-danger" data-action="delete" data-id="${p.id}">Eliminar</button>
+        </div>
+      </div>
+    `).join('') + '</div>';
+  }
+
+  async function loadConfig() {
+    try {
+      const data = await api('/api/data');
+      const s = data.CONFIG?.store || {};
+      document.getElementById('cf-name').value = s.name || '';
+      document.getElementById('cf-tagline').value = s.tagline || '';
+      document.getElementById('cf-story').value = s.story || '';
+      document.getElementById('cf-mission').value = s.mission || '';
+      document.getElementById('cf-hours').value = s.hours || '';
+      document.getElementById('cf-address').value = s.address || '';
+      document.getElementById('cf-email').value = s.email || '';
+      document.getElementById('cf-instagram').value = s.instagram || '';
+    } catch (e) {
+      console.error('Error loading config', e);
+    }
+  }
+
+  document.getElementById('btn-save-config').addEventListener('click', async () => {
+    try {
+      const config = {
+        store_name: document.getElementById('cf-name').value,
+        store_tagline: document.getElementById('cf-tagline').value,
+        store_story: document.getElementById('cf-story').value,
+        store_mission: document.getElementById('cf-mission').value,
+        store_hours: document.getElementById('cf-hours').value,
+        store_address: document.getElementById('cf-address').value,
+        store_email: document.getElementById('cf-email').value,
+        store_instagram: document.getElementById('cf-instagram').value
+      };
+
+      for (const [key, value] of Object.entries(config)) {
+        await api('/api/admin/config', {
+          method: 'POST',
+          body: JSON.stringify({ key, value })
+        });
+      }
+
+      showToast('Configuración guardada');
+    } catch (e) {
+      showToast('Error guardando configuración');
+      console.error(e);
+    }
+  });
+
+  function escapeHtml(str) {
+    if (str == null) return '';
+    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  async function uploadImage(file) {
+    const optimized = await optimizeImage(file, 1200, 0.8);
+    const formData = new FormData();
+    formData.append('file', optimized, file.name);
+    const res = await fetch('/api/admin/upload', {
+      method: 'POST',
+      body: formData
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Error subiendo imagen');
+    }
+    return res.json();
+  }
+
+  async function optimizeImage(file, maxWidth = 1200, quality = 0.8) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          let width = img.width;
+          let height = img.height;
+          if (width > maxWidth) {
+            height = Math.round((height * maxWidth) / width);
+            width = maxWidth;
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = width;
+          canvas.height = height;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          canvas.toBlob(
+            (blob) => {
+              if (!blob) return reject(new Error('No se pudo procesar la imagen'));
+              resolve(new File([blob], file.name, { type: 'image/jpeg' }));
+            },
+            'image/jpeg',
+            quality
+          );
+        };
+        img.onerror = () => reject(new Error('Error cargando imagen'));
+        img.src = e.target.result;
+      };
+      reader.onerror = () => reject(new Error('Error leyendo archivo'));
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function showPreview(url, previewEl) {
+    if (!previewEl) return;
+    if (!url) {
+      previewEl.style.display = 'none';
+      previewEl.src = '';
+      return;
+    }
+    previewEl.src = url;
+    previewEl.style.display = 'block';
+  }
+
+  function attachImageUpload(fileInputId, textInputId, previewId) {
+    const fileInput = document.getElementById(fileInputId);
+    const textInput = document.getElementById(textInputId);
+    const preview = document.getElementById(previewId);
+
+    if (!fileInput || !textInput) return;
+
+    fileInput.addEventListener('change', async () => {
+      const file = fileInput.files[0];
+      if (!file) return;
+      try {
+        showToast('Subiendo imagen...');
+        const data = await uploadImage(file);
+        textInput.value = data.url || '';
+        showPreview(data.url, preview);
+        showToast('Imagen subida');
+      } catch (e) {
+        showToast('Error subiendo imagen');
+        console.error(e);
+      }
+    });
+
+    textInput.addEventListener('input', () => {
+      showPreview(textInput.value, preview);
+    });
+  }
+
+  attachImageUpload('p-file', 'p-img', 'p-img-preview');
+  attachImageUpload('c-file', 'c-image', 'c-img-preview');
+  attachImageUpload('pr-file', 'pr-image', 'pr-img-preview');
+  attachImageUpload('pj-file', 'pj-image', 'pj-img-preview');
+
+  document.getElementById('btn-login').addEventListener('click', login);
+  document.getElementById('admin-password').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') login();
+  });
+  document.getElementById('btn-logout').addEventListener('click', logout);
+  document.getElementById('btn-view-site').addEventListener('click', () => {
+    window.open('/', '_blank');
+  });
+
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.tab;
+      currentTab = target;
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === target));
+      document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === 'section-' + target));
+    });
+  });
+</script>
+
+<script>
+  async function saveProduct() {
+    try {
+      const product = {
+        id: document.getElementById('p-edit-id').value ? Number(document.getElementById('p-edit-id').value) : Date.now(),
+        sku: document.getElementById('p-sku').value,
+        name: document.getElementById('p-name').value,
+        brand: 'MODA FEMENINA',
+        price: Number(document.getElementById('p-price').value) || 0,
+        cat: document.getElementById('p-cat').value,
+        img: document.getElementById('p-img').value,
+        desc: document.getElementById('p-desc').value,
+        description: document.getElementById('p-description').value,
+        details: tryParseJson(document.getElementById('p-details').value, {}),
+        colors: tryParseJson(document.getElementById('p-colors').value, []),
+        sizes: tryParseJson(document.getElementById('p-sizes').value, []),
+        pairsWith: tryParseJson(document.getElementById('p-pairs').value, [])
+      };
+
+      const isEdit = !!document.getElementById('p-edit-id').value;
+      await api('/api/admin/products', {
+        method: isEdit ? 'PUT' : 'POST',
+        body: JSON.stringify({ product })
+      });
+
+      showToast('Producto guardado');
+      resetProductForm();
+      loadProducts();
+      loadDashboard();
+    } catch (e) {
+      showToast('Error guardando producto');
+      console.error(e);
+    }
+  }
+
+  async function deleteProduct(id) {
+    if (!confirm('¿Eliminar producto?')) return;
+    try {
+      await api('/api/admin/products', {
+        method: 'DELETE',
+        body: JSON.stringify({ id })
+      });
+      showToast('Producto eliminado');
+      loadProducts();
+      loadDashboard();
+    } catch (e) {
+      showToast('Error eliminando producto');
+      console.error(e);
+    }
+  }
+
+  async function editProduct(id) {
+    const data = await api('/api/admin/products');
+    const p = (data.products || []).find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('p-edit-id').value = p.id;
+    document.getElementById('p-name').value = p.name || '';
+    document.getElementById('p-sku').value = p.sku || '';
+    document.getElementById('p-price').value = p.price || '';
+    document.getElementById('p-cat').value = p.cat || '';
+    document.getElementById('p-img').value = p.img || '';
+    document.getElementById('p-desc').value = p.desc || '';
+    document.getElementById('p-description').value = p.description || '';
+    document.getElementById('p-details').value = JSON.stringify(p.details || {}, null, 2);
+    document.getElementById('p-colors').value = JSON.stringify(p.colors || [], null, 2);
+    document.getElementById('p-sizes').value = JSON.stringify(p.sizes || [], null, 2);
+    document.getElementById('p-pairs').value = JSON.stringify(p.pairsWith || [], null, 2);
+    document.getElementById('btn-save-product').textContent = 'Actualizar producto';
+    document.getElementById('btn-cancel-edit-product').style.display = 'inline-flex';
+    const pFile = document.getElementById('p-file');
+    if (pFile) pFile.value = '';
+    showPreview(p.img || '', document.getElementById('p-img-preview'));
+  }
+
+  function resetProductForm() {
+    document.getElementById('p-edit-id').value = '';
+    document.getElementById('p-name').value = '';
+    document.getElementById('p-sku').value = '';
+    document.getElementById('p-price').value = '';
+    document.getElementById('p-cat').value = '';
+    document.getElementById('p-img').value = '';
+    document.getElementById('p-desc').value = '';
+    document.getElementById('p-description').value = '';
+    document.getElementById('p-details').value = '';
+    document.getElementById('p-colors').value = '';
+    document.getElementById('p-sizes').value = '';
+    document.getElementById('p-pairs').value = '';
+    document.getElementById('btn-save-product').textContent = 'Guardar producto';
+    document.getElementById('btn-cancel-edit-product').style.display = 'none';
+    const pFile = document.getElementById('p-file');
+    if (pFile) pFile.value = '';
+    showPreview('', document.getElementById('p-img-preview'));
+  }
+
+  document.getElementById('btn-save-product').addEventListener('click', saveProduct);
+  document.getElementById('btn-cancel-edit-product').addEventListener('click', resetProductForm);
+
+  async function saveCategory() {
+    try {
+      const category = {
+        id: document.getElementById('c-edit-id').value || document.getElementById('c-id').value,
+        name: document.getElementById('c-name').value,
+        image: document.getElementById('c-image').value,
+        sort: Number(document.getElementById('c-sort').value) || 0
+      };
+
+      const isEdit = !!document.getElementById('c-edit-id').value;
+      await api('/api/admin/categories', {
+        method: isEdit ? 'PUT' : 'POST',
+        body: JSON.stringify({ category })
+      });
+
+      showToast('Categoría guardada');
+      resetCategoryForm();
+      loadCategories();
+      loadDashboard();
+      await populateCategorySelects();
+    } catch (e) {
+      showToast('Error guardando categoría');
+      console.error(e);
+    }
+  }
+
+  async function deleteCategory(id) {
+    if (!confirm('¿Eliminar categoría?')) return;
+    try {
+      await api('/api/admin/categories', {
+        method: 'DELETE',
+        body: JSON.stringify({ id })
+      });
+      showToast('Categoría eliminada');
+      loadCategories();
+      loadDashboard();
+      await populateCategorySelects();
+    } catch (e) {
+      showToast('Error eliminando categoría');
+      console.error(e);
+    }
+  }
+
+  async function editCategory(id) {
+    const data = await api('/api/admin/categories');
+    const c = (data.categories || []).find(x => x.id === id);
+    if (!c) return;
+    document.getElementById('c-edit-id').value = c.id;
+    document.getElementById('c-id').value = c.id;
+    document.getElementById('c-name').value = c.name || '';
+    document.getElementById('c-image').value = c.image || '';
+    document.getElementById('c-sort').value = c.sort || 0;
+    document.getElementById('btn-save-category').textContent = 'Actualizar categoría';
+    document.getElementById('btn-cancel-edit-category').style.display = 'inline-flex';
+    const cFile = document.getElementById('c-file');
+    if (cFile) cFile.value = '';
+    showPreview(c.image || '', document.getElementById('c-img-preview'));
+  }
+
+  function resetCategoryForm() {
+    document.getElementById('c-edit-id').value = '';
+    document.getElementById('c-id').value = '';
+    document.getElementById('c-name').value = '';
+    document.getElementById('c-image').value = '';
+    document.getElementById('c-sort').value = 0;
+    document.getElementById('btn-save-category').textContent = 'Guardar categoría';
+    document.getElementById('btn-cancel-edit-category').style.display = 'none';
+    const cFile = document.getElementById('c-file');
+    if (cFile) cFile.value = '';
+    showPreview('', document.getElementById('c-img-preview'));
+  }
+
+  document.getElementById('btn-save-category').addEventListener('click', saveCategory);
+  document.getElementById('btn-cancel-edit-category').addEventListener('click', resetCategoryForm);
+
+  async function savePromotion() {
+    try {
+      const promotion = {
+        id: document.getElementById('pr-edit-id').value ? Number(document.getElementById('pr-edit-id').value) : Date.now(),
+        badge: document.getElementById('pr-badge').value,
+        title: document.getElementById('pr-title').value,
+        sub: document.getElementById('pr-sub').value,
+        cat: document.getElementById('pr-cat').value,
+        image: document.getElementById('pr-image').value,
+        fullDescription: document.getElementById('pr-desc').value,
+        validUntil: document.getElementById('pr-valid').value,
+        conditions: tryParseJson(document.getElementById('pr-conditions').value, [])
+      };
+
+      const isEdit = !!document.getElementById('pr-edit-id').value;
+      await api('/api/admin/promotions', {
+        method: isEdit ? 'PUT' : 'POST',
+        body: JSON.stringify({ promotion })
+      });
+
+      showToast('Promoción guardada');
+      resetPromotionForm();
+      loadPromotions();
+      loadDashboard();
+    } catch (e) {
+      showToast('Error guardando promoción');
+      console.error(e);
+    }
+  }
+
+  async function deletePromotion(id) {
+    if (!confirm('¿Eliminar promoción?')) return;
+    try {
+      await api('/api/admin/promotions', {
+        method: 'DELETE',
+        body: JSON.stringify({ id })
+      });
+      showToast('Promoción eliminada');
+      loadPromotions();
+      loadDashboard();
+    } catch (e) {
+      showToast('Error eliminando promoción');
+      console.error(e);
+    }
+  }
+
+  async function editPromotion(id) {
+    const data = await api('/api/admin/promotions');
+    const p = (data.promotions || []).find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('pr-edit-id').value = p.id;
+    document.getElementById('pr-badge').value = p.badge || '';
+    document.getElementById('pr-title').value = p.title || '';
+    document.getElementById('pr-sub').value = p.sub || '';
+    document.getElementById('pr-cat').value = p.cat || '';
+    document.getElementById('pr-image').value = p.image || '';
+    document.getElementById('pr-desc').value = p.fullDescription || '';
+    document.getElementById('pr-valid').value = p.validUntil || '';
+    document.getElementById('pr-conditions').value = JSON.stringify(p.conditions || [], null, 2);
+    document.getElementById('btn-save-promotion').textContent = 'Actualizar promoción';
+    document.getElementById('btn-cancel-edit-promotion').style.display = 'inline-flex';
+    const prFile = document.getElementById('pr-file');
+    if (prFile) prFile.value = '';
+    showPreview(p.image || '', document.getElementById('pr-img-preview'));
+  }
+
+  function resetPromotionForm() {
+    document.getElementById('pr-edit-id').value = '';
+    document.getElementById('pr-badge').value = '';
+    document.getElementById('pr-title').value = '';
+    document.getElementById('pr-sub').value = '';
+    document.getElementById('pr-cat').value = '';
+    document.getElementById('pr-image').value = '';
+    document.getElementById('pr-desc').value = '';
+    document.getElementById('pr-valid').value = '';
+    document.getElementById('pr-conditions').value = '';
+    document.getElementById('btn-save-promotion').textContent = 'Guardar promoción';
+    document.getElementById('btn-cancel-edit-promotion').style.display = 'none';
+    const prFile = document.getElementById('pr-file');
+    if (prFile) prFile.value = '';
+    showPreview('', document.getElementById('pr-img-preview'));
+  }
+
+  document.getElementById('btn-save-promotion').addEventListener('click', savePromotion);
+  document.getElementById('btn-cancel-edit-promotion').addEventListener('click', resetPromotionForm);
+
+  async function saveProject() {
+    try {
+      const project = {
+        id: document.getElementById('pj-edit-id').value ? Number(document.getElementById('pj-edit-id').value) : Date.now(),
+        title: document.getElementById('pj-title').value,
+        cat: document.getElementById('pj-cat').value,
+        location: document.getElementById('pj-location').value,
+        client: document.getElementById('pj-client').value,
+        duration: document.getElementById('pj-duration').value,
+        image: document.getElementById('pj-image').value,
+        description: document.getElementById('pj-description').value,
+        images: []
+      };
+
+      const isEdit = !!document.getElementById('pj-edit-id').value;
+      await api('/api/admin/projects', {
+        method: isEdit ? 'PUT' : 'POST',
+        body: JSON.stringify({ project })
+      });
+
+      showToast('Look guardado');
+      resetProjectForm();
+      loadProjects();
+      loadDashboard();
+    } catch (e) {
+      showToast('Error guardando look');
+      console.error(e);
+    }
+  }
+
+  async function deleteProject(id) {
+    if (!confirm('¿Eliminar look?')) return;
+    try {
+      await api('/api/admin/projects', {
+        method: 'DELETE',
+        body: JSON.stringify({ id })
+      });
+      showToast('Look eliminado');
+      loadProjects();
+      loadDashboard();
+    } catch (e) {
+      showToast('Error eliminando look');
+      console.error(e);
+    }
+  }
+
+  async function editProject(id) {
+    const data = await api('/api/admin/projects');
+    const p = (data.projects || []).find(x => x.id === id);
+    if (!p) return;
+    document.getElementById('pj-edit-id').value = p.id;
+    document.getElementById('pj-title').value = p.title || '';
+    document.getElementById('pj-cat').value = p.cat || '';
+    document.getElementById('pj-location').value = p.location || '';
+    document.getElementById('pj-client').value = p.client || '';
+    document.getElementById('pj-duration').value = p.duration || '';
+    document.getElementById('pj-image').value = p.image || '';
+    document.getElementById('pj-description').value = p.description || '';
+    document.getElementById('btn-save-project').textContent = 'Actualizar look';
+    document.getElementById('btn-cancel-edit-project').style.display = 'inline-flex';
+    const pjFile = document.getElementById('pj-file');
+    if (pjFile) pjFile.value = '';
+    showPreview(p.image || '', document.getElementById('pj-img-preview'));
+  }
+
+  function resetProjectForm() {
+    document.getElementById('pj-edit-id').value = '';
+    document.getElementById('pj-title').value = '';
+    document.getElementById('pj-cat').value = '';
+    document.getElementById('pj-location').value = '';
+    document.getElementById('pj-client').value = '';
+    document.getElementById('pj-duration').value = '';
+    document.getElementById('pj-image').value = '';
+    document.getElementById('pj-description').value = '';
+    document.getElementById('btn-save-project').textContent = 'Guardar look';
+    document.getElementById('btn-cancel-edit-project').style.display = 'none';
+    const pjFile = document.getElementById('pj-file');
+    if (pjFile) pjFile.value = '';
+    showPreview('', document.getElementById('pj-img-preview'));
+  }
+
+  document.getElementById('btn-save-project').addEventListener('click', saveProject);
+  document.getElementById('btn-cancel-edit-project').addEventListener('click', resetProjectForm);
+
+  async function populateCategorySelects() {
+    try {
+      const data = await api('/api/admin/categories');
+      const categories = data.categories || [];
+      const selects = [document.getElementById('p-cat'), document.getElementById('pr-cat'), document.getElementById('pj-cat')];
+      selects.forEach(select => {
+        if (!select) return;
+        const current = select.value;
+        select.innerHTML = categories.map(c => `<option value="${escapeHtml(c.id)}">${escapeHtml(c.name)}</option>`).join('');
+        if (current) select.value = current;
+      });
+    } catch (e) {
+      console.error('Error populating categories', e);
+    }
+  }
+
+  const originalLoadAll = window.loadAll;
+  window.loadAll = async function() {
+    await originalLoadAll();
+    await populateCategorySelects();
+  };
+
+  document.getElementById('products-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.action === 'edit') editProduct(Number(id));
+    else if (btn.dataset.action === 'delete') deleteProduct(Number(id));
+  });
+
+  document.getElementById('categories-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.action === 'edit') editCategory(id);
+    else if (btn.dataset.action === 'delete') deleteCategory(id);
+  });
+
+  document.getElementById('promotions-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.action === 'edit') editPromotion(Number(id));
+    else if (btn.dataset.action === 'delete') deletePromotion(Number(id));
+  });
+
+  document.getElementById('projects-list').addEventListener('click', (e) => {
+    const btn = e.target.closest('button[data-action]');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    if (btn.dataset.action === 'edit') editProject(Number(id));
+    else if (btn.dataset.action === 'delete') deleteProject(Number(id));
+  });
+</script>
+
+</body>
+</html>

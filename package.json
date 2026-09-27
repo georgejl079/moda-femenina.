@@ -1,0 +1,17 @@
+{
+  "name": "moda-femenina",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler pages dev . --port 8788",
+    "deploy": "wrangler pages project create moda-femenina",
+    "migrate:local": "wrangler d1 execute moda-femenina-db --local --file=schema.sql",
+    "seed:local": "wrangler d1 execute moda-femenina-db --local --file=seed.sql",
+    "migrate:remote": "wrangler d1 execute moda-femenina-db --remote --file=schema.sql",
+    "seed:remote": "wrangler d1 execute moda-femenina-db --remote --file=seed.sql",
+    "upload-r2": "node scripts/upload-r2.js"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
