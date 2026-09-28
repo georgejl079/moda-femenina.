@@ -1437,7 +1437,7 @@ Desarrollado por <strong>KEY STUDIO</strong>
 <button type="button" class="tab" data-view="cart" onclick="App.openCart()"><i class="fas fa-shopping-bag"></i><span>Pedido</span></button>
 </nav>
 <script>
-const CONFIG = {
+var CONFIG = {
 phone: '59175179990',
 developer: {
 name: 'KEY STUDIO',
@@ -1454,12 +1454,12 @@ email: 'hola@lilarose.bo',
 instagram: '@lila.rose.bo'
 }
 };
-const heroImages = [
+var heroImages = [
 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=1800&q=85',
 'https://images.unsplash.com/photo-1490481651871-ab68de25d43d?w=1800&q=85',
 'https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?w=1800&q=85'
 ];
-const categories = [
+var categories = [
 { id: 'camisas', name: 'Camisas', image: 'https://images.unsplash.com/photo-1604671801908-6f0c6a092c05?w=600' },
 { id: 'sacos', name: 'Sacos', image: 'https://images.unsplash.com/photo-1591369822096-ffd140ec948f?w=600' },
 { id: 'pantalones', name: 'Pantalones de Vestir', image: 'https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=600' },
@@ -1467,7 +1467,7 @@ const categories = [
 { id: 'vestidos', name: 'Vestidos de Fiesta', image: 'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600' },
 { id: 'accesorios', name: 'Accesorios', image: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=600' }
 ];
-const promotions = [
+var promotions = [
 { badge: 'NUEVA COLECCIÓN', title: 'Bléizer y Sacos', sub: 'Elegancia atemporal', image: 'https://images.unsplash.com/photo-1548624313-0396c75e4b1a?w=1200', cat: 'bleizer',
 fullDescription: 'Nueva colección de bléizers y sacos en telas premium, con cortes entallados y detalles que marcan la diferencia. Perfectos para el trabajo, eventos o el día a día.',
 validUntil: 'Consultar disponibilidad en tienda',
@@ -1481,8 +1481,8 @@ fullDescription: 'Pantalones de vestir femeninos con cortes modernos y telas con
 validUntil: 'Consultar disponibilidad',
 conditions: ['Talles del 36 al 46', 'Varios colores disponibles', 'Sujeto a stock'] }
 ];
-const catLabels = { camisas: 'Camisas', sacos: 'Sacos', pantalones: 'Pantalones de Vestir', bleizer: 'Bléizer', vestidos: 'Vestidos de Fiesta', accesorios: 'Accesorios' };
-const catTaglines = {
+var catLabels = { camisas: 'Camisas', sacos: 'Sacos', pantalones: 'Pantalones de Vestir', bleizer: 'Bléizer', vestidos: 'Vestidos de Fiesta', accesorios: 'Accesorios' };
+var catTaglines = {
 camisas: 'El básico que nunca falla',
 sacos: 'Elegancia en cada detalle',
 pantalones: 'Cortes que estilizan',
@@ -1490,7 +1490,7 @@ bleizer: 'Tu pieza clave del guardarropa',
 vestidos: 'Para las ocasiones especiales',
 accesorios: 'El toque final de tu look'
 };
-const projects = [
+var projects = [
 {
 id: 1,
 title: 'Look Ejecutivo Femenino',
@@ -1571,7 +1571,7 @@ images: [
 description: 'Carteras, pañuelos, cinturones y collares seleccionados para complementar tu look con un toque sofisticado.'
 }
 ];
-const products = [
+var products = [
 {
 id: 1,
 sku: 'LR-CAM-001',
@@ -1682,17 +1682,28 @@ sizes: ['Único'],
   pairsWith: [5, 1, 2]
   }
   ];
-  const FALLBACK_DATA = { CONFIG, heroImages, categories, promotions, catLabels, catTaglines, projects, products };
+  var FALLBACK_DATA = { CONFIG, heroImages, categories, promotions, catLabels, catTaglines, projects, products };
   async function loadStoreData() {
     try {
       const res = await fetch('/api/data');
+      console.log('/api/data status:', res.status);
       if (res.ok) {
-        const data = await res.json();
-        Object.assign(window, data);
-        return;
+        const text = await res.text();
+        console.log('/api/data body:', text);
+        try {
+          const data = JSON.parse(text);
+          Object.assign(window, data);
+          console.log('Loaded data from D1');
+          return;
+        } catch (e) {
+          console.error('Invalid JSON from /api/data', e);
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      console.error('Fetch /api/data failed', e);
+    }
     Object.assign(window, FALLBACK_DATA);
+    console.log('Using fallback data');
   }
   const App = {
 view: 'home',
