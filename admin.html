@@ -5,24 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin · MODA FEMENINA</title>
 <style>
-  :root {
-    --primary: #6b4c9a;
-    --primary-dark: #4d346f;
-    --accent: #e8b4c8;
-    --bg: #fdfbfc;
-    --surface: #f5eef2;
-    --text: #1e1a24;
-    --dim: #5d5566;
-    --muted: #9a8fa3;
-    --border: #eadfe6;
-    --wa: #25D366;
-  }
+  
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f8f7fa;
+    color: #1a1625;
     min-height: 100vh;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, .tab, .btn, .stat strong, .login-box h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
   }
   .login-wrap {
     min-height: 100vh;
@@ -30,202 +25,359 @@
     align-items: center;
     justify-content: center;
     padding: 24px;
+    background: linear-gradient(135deg, #f8f7fa 0%, #ede9f6 100%);
   }
   .login-box {
-    background: #fff;
-    border: 1px solid var(--border);
+    background: #ffffff;
+    border: 1px solid #e8e3ef;
     border-radius: 12px;
-    padding: 32px;
+    padding: 40px;
     width: 100%;
-    max-width: 360px;
-    box-shadow: 0 10px 30px rgba(107,76,154,.12);
+    max-width: 400px;
+    box-shadow: 0 8px 24px rgba(26, 22, 37, 0.12);
   }
   .login-box h1 {
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    margin-bottom: 6px;
-    color: var(--primary);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: #5b3e96;
+    letter-spacing: -0.02em;
   }
-  .login-box p {
-    font-size: 0.85rem;
-    color: var(--dim);
-    margin-bottom: 20px;
+  .login-box > p {
+    font-size: 0.9rem;
+    color: #6b6478;
+    margin-bottom: 28px;
+    line-height: 1.5;
   }
-  .field { margin-bottom: 14px; }
+  .field { margin-bottom: 18px; }
   .field label {
     display: block;
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 6px;
-    font-family: 'Oswald', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: none;
+    color: #4a4458;
+    margin-bottom: 8px;
   }
   .field input, .field textarea, .field select {
     width: 100%;
-    border: 1px solid var(--border);
+    border: 1px solid #e8e3ef;
     border-radius: 8px;
-    padding: 10px 12px;
+    padding: 11px 14px;
     font-family: inherit;
     font-size: 0.9rem;
-    background: #fff;
-    color: var(--text);
+    background: #ffffff;
+    color: #1a1625;
     outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
   .field input:focus, .field textarea:focus, .field select:focus {
-    border-color: var(--primary);
+    border-color: #5b3e96;
+    box-shadow: 0 0 0 3px #ede9f6;
+  }
+  .field textarea {
+    resize: vertical;
+    min-height: 80px;
   }
   .btn {
     border: 0;
     border-radius: 8px;
-    padding: 12px 16px;
-    font-family: 'Oswald', sans-serif;
+    padding: 11px 20px;
     font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
     cursor: pointer;
-    font-size: 0.78rem;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    text-decoration: none;
+    line-height: 1.4;
   }
   .btn-primary {
-    background: var(--primary);
+    background: #5b3e96;
     color: #fff;
-    width: 100%;
   }
-  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-primary:hover {
+    background: #4a2f7a;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 22, 37, 0.08);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
   .btn-accent {
-    background: var(--accent);
-    color: var(--primary-dark);
+    background: #e8b4c8;
+    color: #5b3e96;
+  }
+  .btn-accent:hover {
+    background: #d494b5;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 22, 37, 0.08);
   }
   .btn-danger {
-    background: #dc2626;
+    background: #e74c3c;
     color: #fff;
+  }
+  .btn-danger:hover {
+    background: #c0392b;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(26, 22, 37, 0.08);
   }
   .app { display: none; }
   .app.show { display: block; }
   .topbar {
     position: sticky;
     top: 0;
-    background: var(--primary);
-    color: #fff;
-    padding: 14px 20px;
+    background: #ffffff;
+    color: #1a1625;
+    padding: 16px 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: 16px;
     z-index: 100;
-    border-bottom: 1px solid rgba(232,180,200,.3);
+    border-bottom: 1px solid #e8e3ef;
+    box-shadow: 0 1px 3px rgba(26, 22, 37, 0.06);
+    backdrop-filter: blur(10px);
   }
   .topbar h1 {
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #5b3e96;
+    letter-spacing: -0.02em;
   }
   .tabs {
     display: flex;
-    gap: 8px;
-    padding: 12px 16px;
+    gap: 6px;
+    padding: 16px 24px;
     overflow-x: auto;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
+    background: #ffffff;
+    border-bottom: 1px solid #e8e3ef;
+    position: sticky;
+    top: 65px;
+    z-index: 99;
+    box-shadow: 0 1px 3px rgba(26, 22, 37, 0.06);
   }
   .tab {
-    border: 1px solid var(--border);
-    background: #fff;
-    color: var(--text);
-    padding: 8px 14px;
+    border: 1px solid #e8e3ef;
+    background: #ffffff;
+    color: #4a4458;
+    padding: 8px 16px;
     border-radius: 100px;
-    font-family: 'Oswald', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 0.8rem;
     cursor: pointer;
     white-space: nowrap;
+    transition: all 0.2s ease;
+  }
+  .tab:hover {
+    background: #ede9f6;
+    border-color: #5b3e96;
+    color: #5b3e96;
   }
   .tab.active {
-    background: var(--primary);
+    background: #5b3e96;
     color: #fff;
-    border-color: var(--primary);
+    border-color: #5b3e96;
+    box-shadow: 0 4px 12px rgba(26, 22, 37, 0.08);
   }
-  .section { display: none; padding: 16px; max-width: 1200px; margin: 0 auto; }
-  .section.active { display: block; }
+  .section { display: none; padding: 24px; max-width: 1400px; margin: 0 auto; }
+  .section.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .card {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
-    margin-bottom: 12px;
+    background: #ffffff;
+    border: 1px solid #e8e3ef;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(26, 22, 37, 0.06);
+    transition: box-shadow 0.2s ease;
+  }
+  .card:hover {
+    box-shadow: 0 4px 12px rgba(26, 22, 37, 0.08);
   }
   .card h3 {
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-    color: var(--primary);
-    margin-bottom: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #5b3e96;
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
   }
-  .actions {
+  .form-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 16px;
+  }
+  .form-group {
+    margin-bottom: 18px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: #4a4458;
+    margin-bottom: 8px;
+  }
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    border: 1px solid #e8e3ef;
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-family: inherit;
+    font-size: 0.9rem;
+    background: #ffffff;
+    color: #1a1625;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: #5b3e96;
+    box-shadow: 0 0 0 3px #ede9f6;
+  }
+  .form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  .form-actions {
     display: flex;
-    gap: 8px;
-    margin-top: 10px;
-    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e8e3ef;
   }
   .empty {
     text-align: center;
-    color: var(--muted);
-    padding: 40px 20px;
+    color: #9a94a8;
+    padding: 48px 20px;
     font-style: italic;
+    font-size: 0.9rem;
+  }
+  .empty::before {
+    content: "📭";
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    font-style: normal;
   }
   .toast {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: var(--primary);
+    bottom: 24px;
+    right: 24px;
+    background: #5b3e96;
     color: #fff;
-    padding: 12px 18px;
-    border-radius: 100px;
-    font-family: 'Oswald', sans-serif;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    font-size: 0.75rem;
+    padding: 14px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
     z-index: 9999;
     opacity: 0;
-    transition: opacity 0.3s;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(26, 22, 37, 0.12);
+    border: 1px solid #4a2f7a;
   }
-  .toast.show { opacity: 1; }
+  .toast.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .toast.error {
+    background: #e74c3c;
+    border-color: #c0392b;
+  }
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    margin-bottom: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
   }
   .stat {
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #e8e3ef;
+    border-radius: 12px;
+    padding: 20px;
     text-align: center;
+    box-shadow: 0 1px 3px rgba(26, 22, 37, 0.06);
+    transition: all 0.2s ease;
+  }
+  .stat:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(26, 22, 37, 0.08);
   }
   .stat strong {
     display: block;
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.6rem;
-    color: var(--primary);
-    letter-spacing: 1px;
+    font-size: 2rem;
+    color: #5b3e96;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
   }
-  .stat span {
-    font-size: 0.75rem;
-    color: var(--dim);
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #f8f7fa;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #e8e3ef;
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9a94a8;
+  }
+  @media (max-width: 768px) {
+    .topbar {
+      padding: 12px 16px;
+      flex-wrap: wrap;
+    }
+    .tabs {
+      padding: 12px 16px;
+      top: 56px;
+    }
+    .section {
+      padding: 16px;
+    }
+    .card {
+      padding: 20px;
+    }
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    .stats {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat {
+      padding: 16px;
+    }
+    .stat strong {
+      font-size: 1.5rem;
+    }
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 480px) {
+    .stats {
+      grid-template-columns: 1fr;
+    }
+    .topbar h1 {
+      font-size: 1rem;
+    }
   }
 </style>
 </head>
@@ -240,14 +392,14 @@
       <input type="password" id="admin-password" autocomplete="current-password">
     </div>
     <button type="button" class="btn btn-primary" id="btn-login">Ingresar</button>
-    <p id="login-error" style="color:#dc2626;font-size:0.85rem;margin-top:10px;display:none;"></p>
+    <p id="login-error" style="color:#e74c3c;font-size:0.85rem;margin-top:12px;display:none;font-weight:500;"></p>
   </div>
 </div>
 
 <div class="app" id="app">
   <div class="topbar">
     <h1>Admin · MODA FEMENINA</h1>
-    <div style="display:flex;gap:8px;align-items:center;">
+    <div style="display:flex;gap:10px;align-items:center;">
       <button type="button" class="btn btn-accent" id="btn-view-site">Ver tienda</button>
       <button type="button" class="btn btn-danger" id="btn-logout">Salir</button>
     </div>
@@ -264,103 +416,283 @@
 
   <section class="section active" id="section-dashboard">
     <div class="stats">
-      <div class="stat"><strong id="stat-products">0</strong><span>Productos</span></div>
-      <div class="stat"><strong id="stat-categories">0</strong><span>Categorías</span></div>
-      <div class="stat"><strong id="stat-promotions">0</strong><span>Promociones</span></div>
-      <div class="stat"><strong id="stat-projects">0</strong><span>Looks</span></div>
+      <div class="stat">
+        <strong id="stat-products">0</strong>
+        <span>Productos</span>
+      </div>
+      <div class="stat">
+        <strong id="stat-categories">0</strong>
+        <span>Categorías</span>
+      </div>
+      <div class="stat">
+        <strong id="stat-promotions">0</strong>
+        <span>Promociones</span>
+      </div>
+      <div class="stat">
+        <strong id="stat-projects">0</strong>
+        <span>Looks</span>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Bienvenido al panel de administración</h3>
+      <p style="color: #6b6478; font-size: 0.9rem; line-height: 1.6;">
+        Usá las pestañas superiores para navegar entre las diferentes secciones. 
+        Desde acá podés gestionar productos, categorías, promociones, looks y la configuración de la tienda.
+      </p>
     </div>
   </section>
 
   <section class="section" id="section-products">
     <div class="card">
       <h3>Nuevo producto</h3>
-      <div class="field"><label>Nombre</label><input type="text" id="p-name"></div>
-      <div class="field"><label>SKU</label><input type="text" id="p-sku"></div>
-      <div class="field"><label>Precio (Bs.)</label><input type="number" id="p-price" step="0.01"></div>
-      <div class="field"><label>Categoría</label><select id="p-cat"></select></div>
-      <div class="field"><label>Imagen</label><input type="file" id="p-file" accept="image/*"><input type="text" id="p-img" placeholder="URL de la imagen"><img id="p-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
-      <div class="field"><label>Descripción corta</label><input type="text" id="p-desc"></div>
-      <div class="field"><label>Descripción HTML</label><textarea id="p-description" rows="4"></textarea></div>
-      <div class="field"><label>Detalles (JSON)</label><textarea id="p-details" rows="3" placeholder='{"Material":"..."}'></textarea></div>
-      <div class="field"><label>Colores (JSON)</label><textarea id="p-colors" rows="3" placeholder='[{"hex":"#fff","name":"Blanco"}]'></textarea></div>
-      <div class="field"><label>Talles (JSON)</label><textarea id="p-sizes" rows="2" placeholder='["S","M","L"]'></textarea></div>
-      <div class="field"><label>Combinar con IDs (JSON)</label><textarea id="p-pairs" rows="2" placeholder='[1,2]'></textarea></div>
-      <div class="actions">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" id="p-name" placeholder="Nombre del producto">
+        </div>
+        <div class="form-group">
+          <label>SKU</label>
+          <input type="text" id="p-sku" placeholder="Código SKU">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Precio (Bs.)</label>
+          <input type="number" id="p-price" step="0.01" placeholder="0.00">
+        </div>
+        <div class="form-group">
+          <label>Categoría</label>
+          <select id="p-cat"></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Imagen</label>
+        <input type="file" id="p-file" accept="image/*" style="margin-bottom: 8px;">
+        <input type="text" id="p-img" placeholder="URL de la imagen">
+        <img id="p-img-preview" style="display:none;width:100%;height:160px;object-fit:cover;border-radius:6px;margin-top:10px;border:1px solid #e8e3ef;">
+      </div>
+      <div class="form-group">
+        <label>Descripción corta</label>
+        <input type="text" id="p-desc" placeholder="Breve descripción del producto">
+      </div>
+      <div class="form-group">
+        <label>Descripción HTML</label>
+        <textarea id="p-description" rows="4" placeholder="Descripción completa en HTML"></textarea>
+      </div>
+      <details style="margin-bottom: 16px;">
+        <summary style="cursor: pointer; color: #5b3e96; font-weight: 600; font-size: 0.85rem; margin-bottom: 12px; user-select: none;">
+          Opciones avanzadas
+        </summary>
+        <div style="margin-top: 12px;">
+          <div class="form-group">
+            <label>Detalles (JSON)</label>
+            <textarea id="p-details" rows="3" placeholder='{"Material":"..."}'></textarea>
+          </div>
+          <div class="form-group">
+            <label>Colores (JSON)</label>
+            <textarea id="p-colors" rows="3" placeholder='[{"hex":"#fff","name":"Blanco"}]'></textarea>
+          </div>
+          <div class="form-group">
+            <label>Talles (JSON)</label>
+            <textarea id="p-sizes" rows="2" placeholder='["S","M","L"]'></textarea>
+          </div>
+          <div class="form-group">
+            <label>Combinar con IDs (JSON)</label>
+            <textarea id="p-pairs" rows="2" placeholder='[1,2]'></textarea>
+          </div>
+        </div>
+      </details>
+      <div class="form-actions">
         <button type="button" class="btn btn-primary" id="btn-save-product">Guardar producto</button>
         <button type="button" class="btn btn-accent" id="btn-cancel-edit-product" style="display:none;">Cancelar edición</button>
       </div>
       <input type="hidden" id="p-edit-id">
     </div>
-    <div class="card"><h3>Productos</h3><div id="products-list"></div></div>
+    <div class="card">
+      <h3>Productos</h3>
+      <div id="products-list"></div>
+    </div>
   </section>
 
   <section class="section" id="section-categories">
     <div class="card">
       <h3>Nueva categoría</h3>
-      <div class="field"><label>ID</label><input type="text" id="c-id"></div>
-      <div class="field"><label>Nombre</label><input type="text" id="c-name"></div>
-      <div class="field"><label>Imagen</label><input type="file" id="c-file" accept="image/*"><input type="text" id="c-image" placeholder="URL de la imagen"><img id="c-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
-      <div class="field"><label>Orden</label><input type="number" id="c-sort" value="0"></div>
-      <div class="actions">
+      <div class="form-row">
+        <div class="form-group">
+          <label>ID</label>
+          <input type="text" id="c-id" placeholder="Identificador único">
+        </div>
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" id="c-name" placeholder="Nombre de la categoría">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Imagen</label>
+        <input type="file" id="c-file" accept="image/*" style="margin-bottom: 8px;">
+        <input type="text" id="c-image" placeholder="URL de la imagen">
+        <img id="c-img-preview" style="display:none;width:100%;height:160px;object-fit:cover;border-radius:6px;margin-top:10px;border:1px solid #e8e3ef;">
+      </div>
+      <div class="form-group">
+        <label>Orden</label>
+        <input type="number" id="c-sort" value="0" placeholder="0">
+      </div>
+      <div class="form-actions">
         <button type="button" class="btn btn-primary" id="btn-save-category">Guardar categoría</button>
         <button type="button" class="btn btn-accent" id="btn-cancel-edit-category" style="display:none;">Cancelar edición</button>
       </div>
       <input type="hidden" id="c-edit-id">
     </div>
-    <div class="card"><h3>Categorías</h3><div id="categories-list"></div></div>
+    <div class="card">
+      <h3>Categorías</h3>
+      <div id="categories-list"></div>
+    </div>
   </section>
 
   <section class="section" id="section-promotions">
     <div class="card">
       <h3>Nueva promoción</h3>
-      <div class="field"><label>Badge</label><input type="text" id="pr-badge"></div>
-      <div class="field"><label>Título</label><input type="text" id="pr-title"></div>
-      <div class="field"><label>Subtítulo</label><input type="text" id="pr-sub"></div>
-      <div class="field"><label>Categoría</label><select id="pr-cat"></select></div>
-      <div class="field"><label>Imagen</label><input type="file" id="pr-file" accept="image/*"><input type="text" id="pr-image" placeholder="URL de la imagen"><img id="pr-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
-      <div class="field"><label>Descripción completa</label><textarea id="pr-desc" rows="4"></textarea></div>
-      <div class="field"><label>Vigencia</label><input type="text" id="pr-valid"></div>
-      <div class="field"><label>Condiciones (JSON)</label><textarea id="pr-conditions" rows="3" placeholder='["Cond 1","Cond 2"]'></textarea></div>
-      <div class="actions">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Badge</label>
+          <input type="text" id="pr-badge" placeholder="Ej: -20%">
+        </div>
+        <div class="form-group">
+          <label>Título</label>
+          <input type="text" id="pr-title" placeholder="Título de la promoción">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Subtítulo</label>
+        <input type="text" id="pr-sub" placeholder="Subtítulo descriptivo">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Categoría</label>
+          <select id="pr-cat"></select>
+        </div>
+        <div class="form-group">
+          <label>Vigencia</label>
+          <input type="text" id="pr-valid" placeholder="Ej: Hasta el 31/12/2025">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Imagen</label>
+        <input type="file" id="pr-file" accept="image/*" style="margin-bottom: 8px;">
+        <input type="text" id="pr-image" placeholder="URL de la imagen">
+        <img id="pr-img-preview" style="display:none;width:100%;height:160px;object-fit:cover;border-radius:6px;margin-top:10px;border:1px solid #e8e3ef;">
+      </div>
+      <div class="form-group">
+        <label>Descripción completa</label>
+        <textarea id="pr-desc" rows="4" placeholder="Descripción completa de la promoción"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Condiciones (JSON)</label>
+        <textarea id="pr-conditions" rows="3" placeholder='["Cond 1","Cond 2"]'></textarea>
+      </div>
+      <div class="form-actions">
         <button type="button" class="btn btn-primary" id="btn-save-promotion">Guardar promoción</button>
         <button type="button" class="btn btn-accent" id="btn-cancel-edit-promotion" style="display:none;">Cancelar edición</button>
       </div>
       <input type="hidden" id="pr-edit-id">
     </div>
-    <div class="card"><h3>Promociones</h3><div id="promotions-list"></div></div>
+    <div class="card">
+      <h3>Promociones</h3>
+      <div id="promotions-list"></div>
+    </div>
   </section>
 
   <section class="section" id="section-projects">
     <div class="card">
       <h3>Nuevo look</h3>
-      <div class="field"><label>Título</label><input type="text" id="pj-title"></div>
-      <div class="field"><label>Categoría</label><select id="pj-cat"></select></div>
-      <div class="field"><label>Ubicación</label><input type="text" id="pj-location"></div>
-      <div class="field"><label>Cliente</label><input type="text" id="pj-client"></div>
-      <div class="field"><label>Duración</label><input type="text" id="pj-duration"></div>
-      <div class="field"><label>Imagen</label><input type="file" id="pj-file" accept="image/*"><input type="text" id="pj-image" placeholder="URL de la imagen"><img id="pj-img-preview" style="display:none;width:100%;height:120px;object-fit:cover;border-radius:6px;margin-top:6px;"></div>
-      <div class="field"><label>Descripción</label><textarea id="pj-description" rows="4"></textarea></div>
-      <div class="actions">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Título</label>
+          <input type="text" id="pj-title" placeholder="Título del look">
+        </div>
+        <div class="form-group">
+          <label>Categoría</label>
+          <select id="pj-cat"></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Ubicación</label>
+          <input type="text" id="pj-location" placeholder="Ubicación">
+        </div>
+        <div class="form-group">
+          <label>Cliente</label>
+          <input type="text" id="pj-client" placeholder="Nombre del cliente">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Duración</label>
+        <input type="text" id="pj-duration" placeholder="Ej: 2 horas">
+      </div>
+      <div class="form-group">
+        <label>Imagen</label>
+        <input type="file" id="pj-file" accept="image/*" style="margin-bottom: 8px;">
+        <input type="text" id="pj-image" placeholder="URL de la imagen">
+        <img id="pj-img-preview" style="display:none;width:100%;height:160px;object-fit:cover;border-radius:6px;margin-top:10px;border:1px solid #e8e3ef;">
+      </div>
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea id="pj-description" rows="4" placeholder="Descripción del look"></textarea>
+      </div>
+      <div class="form-actions">
         <button type="button" class="btn btn-primary" id="btn-save-project">Guardar look</button>
         <button type="button" class="btn btn-accent" id="btn-cancel-edit-project" style="display:none;">Cancelar edición</button>
       </div>
       <input type="hidden" id="pj-edit-id">
     </div>
-    <div class="card"><h3>Looks</h3><div id="projects-list"></div></div>
+    <div class="card">
+      <h3>Looks</h3>
+      <div id="projects-list"></div>
+    </div>
   </section>
 
   <section class="section" id="section-config">
     <div class="card">
       <h3>Configuración de la tienda</h3>
-      <div class="field"><label>Nombre</label><input type="text" id="cf-name"></div>
-      <div class="field"><label>Eslogan</label><input type="text" id="cf-tagline"></div>
-      <div class="field"><label>Historia</label><textarea id="cf-story" rows="4"></textarea></div>
-      <div class="field"><label>Misión</label><textarea id="cf-mission" rows="3"></textarea></div>
-      <div class="field"><label>Horario</label><input type="text" id="cf-hours"></div>
-      <div class="field"><label>Dirección</label><input type="text" id="cf-address"></div>
-      <div class="field"><label>Email</label><input type="text" id="cf-email"></div>
-      <div class="field"><label>Instagram</label><input type="text" id="cf-instagram"></div>
-      <div class="actions">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nombre de la tienda</label>
+          <input type="text" id="cf-name" placeholder="Nombre de tu tienda">
+        </div>
+        <div class="form-group">
+          <label>Eslogan</label>
+          <input type="text" id="cf-tagline" placeholder="Eslogan de la tienda">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Historia</label>
+        <textarea id="cf-story" rows="4" placeholder="Historia de la marca"></textarea>
+      </div>
+      <div class="form-group">
+        <label>Misión</label>
+        <textarea id="cf-mission" rows="3" placeholder="Misión de la tienda"></textarea>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Horario</label>
+          <input type="text" id="cf-hours" placeholder="Ej: Lun-Vie 10:00-19:00">
+        </div>
+        <div class="form-group">
+          <label>Dirección</label>
+          <input type="text" id="cf-address" placeholder="Dirección física">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Email</label>
+          <input type="text" id="cf-email" placeholder="contacto@tienda.com">
+        </div>
+        <div class="form-group">
+          <label>Instagram</label>
+          <input type="text" id="cf-instagram" placeholder="@usuario">
+        </div>
+      </div>
+      <div class="form-actions">
         <button type="button" class="btn btn-primary" id="btn-save-config">Guardar configuración</button>
       </div>
     </div>
@@ -377,9 +709,11 @@
     try { return JSON.parse(str); } catch { return fallback; }
   }
 
-  function showToast(msg) {
+  function showToast(msg, isError = false) {
     const t = document.getElementById('toast');
     t.textContent = msg;
+    t.classList.remove('error');
+    if (isError) t.classList.add('error');
     t.classList.add('show');
     setTimeout(() => t.classList.remove('show'), 2500);
   }
@@ -464,8 +798,8 @@
     list.innerHTML = '<div class="grid">' + products.map(p => `
       <div class="card" style="margin-bottom:0">
         <h3>${escapeHtml(p.name)}</h3>
-        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(p.sku)} · ${escapeHtml(p.cat)}</p>
-        <p style="font-size:0.9rem;font-weight:700;color:var(--accent-dark)">Bs. ${p.price}</p>
+        <p style="font-size:0.85rem;color:#6b6478;margin-bottom:6px;">${escapeHtml(p.sku)} · ${escapeHtml(p.cat)}</p>
+        <p style="font-size:1rem;font-weight:700;color:#5b3e96;margin-bottom:12px;">Bs. ${p.price}</p>
         <div class="actions">
           <button type="button" class="btn btn-accent" data-action="edit" data-id="${p.id}">Editar</button>
           <button type="button" class="btn btn-danger" data-action="delete" data-id="${p.id}">Eliminar</button>
@@ -485,8 +819,8 @@
     list.innerHTML = '<div class="grid">' + categories.map(c => `
       <div class="card" style="margin-bottom:0">
         <h3>${escapeHtml(c.name)}</h3>
-        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(c.id)} · sort: ${c.sort}</p>
-        <img src="${escapeHtml(c.image)}" style="width:100%;height:140px;object-fit:cover;border-radius:6px;margin-top:8px;" alt="${escapeHtml(c.name)}">
+        <p style="font-size:0.85rem;color:#6b6478;margin-bottom:8px;">${escapeHtml(c.id)} · Orden: ${c.sort}</p>
+        <img src="${escapeHtml(c.image)}" style="width:100%;height:160px;object-fit:cover;border-radius:6px;margin-bottom:12px;border:1px solid #e8e3ef;" alt="${escapeHtml(c.name)}" onerror="this.style.display='none'">
         <div class="actions">
           <button type="button" class="btn btn-accent" data-action="edit" data-id="${escapeHtml(c.id)}">Editar</button>
           <button type="button" class="btn btn-danger" data-action="delete" data-id="${escapeHtml(c.id)}">Eliminar</button>
@@ -506,7 +840,7 @@
     list.innerHTML = '<div class="grid">' + promotions.map(p => `
       <div class="card" style="margin-bottom:0">
         <h3>${escapeHtml(p.title)}</h3>
-        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(p.badge)} · ${escapeHtml(p.cat)}</p>
+        <p style="font-size:0.85rem;color:#6b6478;margin-bottom:6px;">${escapeHtml(p.badge)} · ${escapeHtml(p.cat)}</p>
         <div class="actions">
           <button type="button" class="btn btn-accent" data-action="edit" data-id="${p.id}">Editar</button>
           <button type="button" class="btn btn-danger" data-action="delete" data-id="${p.id}">Eliminar</button>
@@ -526,7 +860,7 @@
     list.innerHTML = '<div class="grid">' + projects.map(p => `
       <div class="card" style="margin-bottom:0">
         <h3>${escapeHtml(p.title)}</h3>
-        <p style="font-size:0.85rem;color:var(--dim)">${escapeHtml(p.cat)} · ${escapeHtml(p.location)}</p>
+        <p style="font-size:0.85rem;color:#6b6478;margin-bottom:6px;">${escapeHtml(p.cat)} · ${escapeHtml(p.location)}</p>
         <div class="actions">
           <button type="button" class="btn btn-accent" data-action="edit" data-id="${p.id}">Editar</button>
           <button type="button" class="btn btn-danger" data-action="delete" data-id="${p.id}">Eliminar</button>
@@ -725,7 +1059,7 @@
       loadProducts();
       loadDashboard();
     } catch (e) {
-      showToast('Error guardando producto');
+      showToast('Error guardando producto', true);
       console.error(e);
     }
   }
@@ -741,7 +1075,7 @@
       loadProducts();
       loadDashboard();
     } catch (e) {
-      showToast('Error eliminando producto');
+      showToast('Error eliminando producto', true);
       console.error(e);
     }
   }
@@ -1094,3 +1428,4 @@
 
 </body>
 </html>
+

@@ -2,58 +2,134 @@ export async function onRequestGet(context) {
   const { env } = context;
 
   try {
-    const configResult = await env.DB.prepare("SELECT key, value FROM config").all();
     const config = {};
-    for (const row of configResult.results) {
-      config[row.key] = JSON.parse(row.value);
+    try {
+      const configResult = await env.DB.prepare("SELECT key, value FROM config").all();
+      for (const row of configResult.results) {
+        try {
+          config[row.key] = JSON.parse(row.value);
+        } catch {
+          config[row.key] = row.value;
+        }
+      }
+    } catch (e) {
+      console.error('Error loading config:', e);
     }
 
-    const catResult = await env.DB.prepare("SELECT id, name, image, sort FROM categories ORDER BY sort").all();
-    const categories = catResult.results;
+    const categories = [];
+    try {
+      const catResult = await env.DB.prepare("SELECT id, name, image, sort FROM categories ORDER BY sort").all();
+      categories.push(...catResult.results);
+    } catch (e) {
+      console.error('Error loading categories:', e);
+    }
 
-    const promoResult = await env.DB.prepare("SELECT * FROM promotions").all();
-    const promotions = promoResult.results.map((p) => ({
-      id: p.id,
-      badge: p.badge,
-      title: p.title,
-      sub: p.sub,
-      image: p.image,
-      cat: p.cat,
-      fullDescription: p.full_description,
-      validUntil: p.valid_until,
-      conditions: p.conditions ? JSON.parse(p.conditions) : []
-    }));
+    const promotions = [];
+    try {
+      const promoResult = await env.DB.prepare("SELECT * FROM promotions").all();
+      for (const p of promoResult.results) {
+        let conditions = [];
+        try {
+          conditions = p.conditions ? JSON.parse(p.conditions) : [];
+        } catch {
+          conditions = [];
+        }
+        promotions.push({
+          id: p.id,
+          badge: p.badge,
+          title: p.title,
+          sub: p.sub,
+          image: p.image,
+          cat: p.cat,
+          fullDescription: p.full_description,
+          validUntil: p.valid_until,
+          conditions
+        });
+      }
+    } catch (e) {
+      console.error('Error loading promotions:', e);
+    }
 
-    const prodResult = await env.DB.prepare("SELECT * FROM products ORDER BY id").all();
-    const products = prodResult.results.map((p) => ({
-      id: p.id,
-      sku: p.sku,
-      name: p.name,
-      brand: p.brand,
-      price: p.price,
-      cat: p.cat,
-      img: p.img,
-      images: p.images_json ? JSON.parse(p.images_json) : [],
-      desc: p.desc,
-      description: p.description,
-      details: p.details_json ? JSON.parse(p.details_json) : {},
-      colors: p.colors_json ? JSON.parse(p.colors_json) : [],
-      sizes: p.sizes_json ? JSON.parse(p.sizes_json) : [],
-      pairsWith: p.pairs_with_json ? JSON.parse(p.pairs_with_json) : []
-    }));
+    const products = [];
+    try {
+      const prodResult = await env.DB.prepare("SELECT * FROM products ORDER BY id").all();
+      for (const p of prodResult.results) {
+        let images = [];
+        let details = {};
+        let colors = [];
+        let sizes = [];
+        let pairsWith = [];
+        try {
+          images = p.images_json ? JSON.parse(p.images_json) : [];
+        } catch {
+          images = [];
+        }
+        try {
+          details = p.details_json ? JSON.parse(p.details_json) : {};
+        } catch {
+          details = {};
+        }
+        try {
+          colors = p.colors_json ? JSON.parse(p.colors_json) : [];
+        } catch {
+          colors = [];
+        }
+        try {
+          sizes = p.sizes_json ? JSON.parse(p.sizes_json) : [];
+        } catch {
+          sizes = [];
+        }
+        try {
+          pairsWith = p.pairs_with_json ? JSON.parse(p.pairs_with_json) : [];
+        } catch {
+          pairsWith = [];
+        }
+        products.push({
+          id: p.id,
+          sku: p.sku,
+          name: p.name,
+          brand: p.brand,
+          price: p.price,
+          cat: p.cat,
+          img: p.img,
+          images,
+          desc: p.desc,
+          description: p.description,
+          details,
+          colors,
+          sizes,
+          pairsWith
+        });
+      }
+    } catch (e) {
+      console.error('Error loading products:', e);
+    }
 
-    const projResult = await env.DB.prepare("SELECT * FROM projects ORDER BY id").all();
-    const projects = projResult.results.map((p) => ({
-      id: p.id,
-      title: p.title,
-      cat: p.cat,
-      location: p.location,
-      client: p.client,
-      duration: p.duration,
-      image: p.image,
-      images: p.images_json ? JSON.parse(p.images_json) : [],
-      description: p.description
-    }));
+    const projects = [];
+    try {
+      const projResult = await env.DB.prepare("SELECT * FROM projects ORDER BY id").all();
+      for (const p of projResult.results) {
+        let images = [];
+        try {
+          images = p.images_json ? JSON.parse(p.images_json) : [];
+        } catch {
+          images = [];
+        }
+        projects.push({
+          id: p.id,
+          title: p.title,
+          cat: p.cat,
+          location: p.location,
+          client: p.client,
+          duration: p.duration,
+          image: p.image,
+          images,
+          description: p.description
+        });
+      }
+    } catch (e) {
+      console.error('Error loading projects:', e);
+    }
 
     const catLabels = {};
     for (const c of categories) {
